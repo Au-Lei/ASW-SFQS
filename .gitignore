@@ -3,10 +3,9 @@
 # Historical workbooks, quotation previews and one-off scripts can contain real rates.
 /outputs/
 /data/
-/.env
-/.env.local
-/.env.*
-!/.env.example
+**/.env
+**/.env.*
+!**/.env.example
 *.pem
 *.key
 **/.DS_Store

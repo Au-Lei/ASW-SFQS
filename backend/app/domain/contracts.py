@@ -553,7 +553,8 @@ class ErrorDetail(Contract):
 
 class APIError(Contract):
     code: Literal["BAD_REQUEST", "NOT_FOUND", "VERSION_CONFLICT", "PLAN_STALE", "IDEMPOTENCY_KEY_REUSED",
-                  "ACTION_BLOCKED", "VALIDATION_ERROR", "PAYLOAD_TOO_LARGE", "INTERNAL_ERROR"]
+                  "ACTION_BLOCKED", "VALIDATION_ERROR", "PAYLOAD_TOO_LARGE", "INTERNAL_ERROR",
+                  "FORBIDDEN", "METHOD_NOT_ALLOWED"]
     message: NonEmpty
     details: list[ErrorDetail] = Field(default_factory=list)
     request_id: NonEmpty
@@ -561,6 +562,42 @@ class APIError(Contract):
 
 class ErrorResponse(Contract):
     error: APIError
+
+
+class HealthResponse(Contract):
+    status: Literal["ok"]
+    version: str
+    stage: Literal["T04"]
+    database_status: Literal["NOT_INITIALIZED"]
+    model_status: Literal["NOT_CONFIGURED", "ADAPTER_NOT_IMPLEMENTED"]
+
+
+class DestinationPreview(Contract):
+    id: UUID
+    name_en: str
+    name_zh: str
+    country_zh: str
+
+
+class RegionSummary(Contract):
+    id: UUID
+    name: str
+    destination_count: Annotated[int, Field(ge=0)]
+    route_group_count: Annotated[int, Field(ge=0)]
+    route_names: list[str]
+    preview_destinations: list[DestinationPreview]
+
+
+class BootstrapResponse(Contract):
+    origin_name: str
+    regions: list[RegionSummary]
+    quotation_status: Literal["NOT_INITIALIZED"]
+    model_status: Literal["NOT_CONFIGURED", "ADAPTER_NOT_IMPLEMENTED"]
+    csrf_token: NonEmpty
+
+
+class SessionResponse(Contract):
+    status: Literal["VALID"]
 
 
 def payload_hash(values: QuotationValues) -> str:
@@ -648,3 +685,6 @@ class ContractBundle(Contract):
     change_action: ChangeAction
     destination: DestinationRef
     directory: DestinationDirectory
+    health: HealthResponse
+    bootstrap: BootstrapResponse
+    session: SessionResponse

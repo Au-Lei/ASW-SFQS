@@ -13,7 +13,9 @@
             "ACTION_BLOCKED",
             "VALIDATION_ERROR",
             "PAYLOAD_TOO_LARGE",
-            "INTERNAL_ERROR"
+            "INTERNAL_ERROR",
+            "FORBIDDEN",
+            "METHOD_NOT_ALLOWED"
           ],
           "title": "Code",
           "type": "string"
@@ -112,6 +114,49 @@
         "applied_count"
       ],
       "title": "ApplyResponse",
+      "type": "object"
+    },
+    "BootstrapResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "origin_name": {
+          "title": "Origin Name",
+          "type": "string"
+        },
+        "regions": {
+          "items": {
+            "$ref": "#/$defs/RegionSummary"
+          },
+          "title": "Regions",
+          "type": "array"
+        },
+        "quotation_status": {
+          "const": "NOT_INITIALIZED",
+          "title": "Quotation Status",
+          "type": "string"
+        },
+        "model_status": {
+          "enum": [
+            "NOT_CONFIGURED",
+            "ADAPTER_NOT_IMPLEMENTED"
+          ],
+          "title": "Model Status",
+          "type": "string"
+        },
+        "csrf_token": {
+          "minLength": 1,
+          "title": "Csrf Token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "origin_name",
+        "regions",
+        "quotation_status",
+        "model_status",
+        "csrf_token"
+      ],
+      "title": "BootstrapResponse",
       "type": "object"
     },
     "Candidate": {
@@ -764,6 +809,36 @@
       "title": "DestinationKind",
       "type": "string"
     },
+    "DestinationPreview": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "name_en": {
+          "title": "Name En",
+          "type": "string"
+        },
+        "name_zh": {
+          "title": "Name Zh",
+          "type": "string"
+        },
+        "country_zh": {
+          "title": "Country Zh",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name_en",
+        "name_zh",
+        "country_zh"
+      ],
+      "title": "DestinationPreview",
+      "type": "object"
+    },
     "DestinationRef": {
       "additionalProperties": false,
       "properties": {
@@ -1374,6 +1449,47 @@
         "issues"
       ],
       "title": "ExtractionOutput",
+      "type": "object"
+    },
+    "HealthResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "ok",
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "stage": {
+          "const": "T04",
+          "title": "Stage",
+          "type": "string"
+        },
+        "database_status": {
+          "const": "NOT_INITIALIZED",
+          "title": "Database Status",
+          "type": "string"
+        },
+        "model_status": {
+          "enum": [
+            "NOT_CONFIGURED",
+            "ADAPTER_NOT_IMPLEMENTED"
+          ],
+          "title": "Model Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "version",
+        "stage",
+        "database_status",
+        "model_status"
+      ],
+      "title": "HealthResponse",
       "type": "object"
     },
     "ImageLocation": {
@@ -2058,6 +2174,54 @@
       "title": "ReferencePrice",
       "type": "object"
     },
+    "RegionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "destination_count": {
+          "minimum": 0,
+          "title": "Destination Count",
+          "type": "integer"
+        },
+        "route_group_count": {
+          "minimum": 0,
+          "title": "Route Group Count",
+          "type": "integer"
+        },
+        "route_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Names",
+          "type": "array"
+        },
+        "preview_destinations": {
+          "items": {
+            "$ref": "#/$defs/DestinationPreview"
+          },
+          "title": "Preview Destinations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "destination_count",
+        "route_group_count",
+        "route_names",
+        "preview_destinations"
+      ],
+      "title": "RegionSummary",
+      "type": "object"
+    },
     "ReviewRequest": {
       "additionalProperties": false,
       "properties": {
@@ -2232,6 +2396,21 @@
       "title": "Schedule",
       "type": "object"
     },
+    "SessionResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "VALID",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "SessionResponse",
+      "type": "object"
+    },
     "TextLocation": {
       "additionalProperties": false,
       "properties": {
@@ -2397,6 +2576,15 @@
     },
     "directory": {
       "$ref": "#/$defs/DestinationDirectory"
+    },
+    "health": {
+      "$ref": "#/$defs/HealthResponse"
+    },
+    "bootstrap": {
+      "$ref": "#/$defs/BootstrapResponse"
+    },
+    "session": {
+      "$ref": "#/$defs/SessionResponse"
     }
   },
   "required": [
@@ -2413,7 +2601,10 @@
     "job_state",
     "change_action",
     "destination",
-    "directory"
+    "directory",
+    "health",
+    "bootstrap",
+    "session"
   ],
   "title": "ContractBundle",
   "type": "object",
