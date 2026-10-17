@@ -1,7 +1,7 @@
 """Synthetic SQLite integration tests; no private quotations or seed import."""
 from datetime import date, datetime, timezone
 from contextlib import closing
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from pathlib import Path
 import sqlite3
 import tempfile
@@ -33,6 +33,13 @@ HASH = "a" * 64
 
 
 class DatabaseTests(unittest.TestCase):
+    def test_money_round_trip_ignores_external_decimal_precision(self):
+        with localcontext() as context:
+            context.prec = 3
+            self.populated(price_20gp="12345678901234.5678")
+            with Session(self.engine) as session:
+                self.assertEqual(session.get(QuotationRevision, "revision").price_20gp, Decimal("12345678901234.5678"))
+
     def setUp(self):
         root = ROOT / "data/test-tmp"
         root.mkdir(parents=True, exist_ok=True)

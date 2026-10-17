@@ -8,7 +8,6 @@ from __future__ import annotations
 import hashlib
 import json
 from datetime import date, datetime
-from decimal import Decimal
 from enum import Enum
 from typing import Annotated, Any, Literal
 from uuid import UUID
@@ -98,11 +97,31 @@ class ExportMode(str, Enum):
     FILTERED = "FILTERED"
 
 
+class ContainerType(str, Enum):
+    GP20 = "20GP"
+    GP40 = "40GP"
+    HQ40 = "40HQ"
+
+
+class IssueAction(str, Enum):
+    APPLY = "APPLY"
+    COMPARE = "COMPARE"
+    EXPORT = "EXPORT"
+    REVIEW = "REVIEW"
+    DATE_FILTER = "DATE_FILTER"
+
+
 Money = Annotated[str, Field(strict=True, pattern=r"^(0|[1-9][0-9]{0,13})(\.[0-9]{1,4})?$",
                              description="Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown")]
 ISODate = Annotated[str, Field(strict=True, pattern=r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")]
 Version = Annotated[int, Field(strict=True, ge=1)]
-NonEmpty = Annotated[str, Field(strict=True, min_length=1)]
+def nonblank(value: str) -> str:
+    if not value.strip():
+        raise ValueError("BLANK_VALUE")
+    return value
+
+
+NonEmpty = Annotated[str, Field(strict=True, min_length=1), AfterValidator(nonblank)]
 Sha256 = Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
 Currency = Annotated[str, Field(pattern=r"^[A-Z]{3}$", strict=True)]
 Weekday = Annotated[int, Field(strict=True, ge=1, le=7)]
@@ -146,6 +165,8 @@ class Provenance(Contract):
     evidence_ids: list[UUID] = Field(default_factory=list)
     rule_id: str | None = None
     confidence: Annotated[float, Field(ge=0, le=1)] | None = None
+    recorded_by: UUID | None = None
+    recorded_at: Timestamp | None = None
 
     @model_validator(mode="after")
     def derivation(self):
@@ -153,6 +174,8 @@ class Provenance(Contract):
             raise ValueError("DERIVATION_RULE_REQUIRED")
         if self.origin in (ProvenanceOrigin.EXPLICIT, ProvenanceOrigin.RULE_DERIVED) and not self.evidence_ids:
             raise ValueError("EVIDENCE_REQUIRED")
+        if self.origin == ProvenanceOrigin.MANUAL and (self.recorded_by is None or self.recorded_at is None):
+            raise ValueError("MANUAL_ACTOR_REQUIRED")
         return self
 
 
@@ -199,7 +222,7 @@ class ExtractedIssue(Contract):
     code: Annotated[str, Field(pattern=r"^[A-Z][A-Z0-9_]*$")]
     field_paths: list[str] = Field(default_factory=list)
     message: NonEmpty
-    affected_actions: list[Literal["APPLY", "COMPARE", "EXPORT", "REVIEW"]]
+    affected_actions: list[IssueAction]
     severity: Literal["INFO", "WARNING", "ERROR"]
 
 
@@ -207,6 +230,12 @@ class Issue(ExtractedIssue):
     resolution: Literal["OPEN", "ACKNOWLEDGED", "RESOLVED"] = "OPEN"
     acknowledged_by: UUID | None = None
     acknowledged_at: Timestamp | None = None
+
+    @model_validator(mode="after")
+    def human_resolution(self):
+        if self.resolution != "OPEN" and (self.acknowledged_by is None or self.acknowledged_at is None):
+            raise ValueError("ISSUE_ACTOR_REQUIRED")
+        return self
 
 
 class LiteralPrice(Contract):
@@ -268,6 +297,18 @@ class Schedule(Contract):
     transit_day_options: list[Annotated[int, Field(strict=True, ge=0)]] = Field(default_factory=list)
     transit_binding: Literal["UNKNOWN", "SINGLE", "ALTERNATIVES", "CONFIRMED_RANGE"] = "UNKNOWN"
     # No actual ETD inferred from periodic weekdays.
+
+    @model_validator(mode="after")
+    def normalize_and_validate(self):
+        self.weekdays = sorted(set(self.weekdays))
+        options = self.transit_day_options
+        if self.transit_binding == "SINGLE" and len(options) != 1:
+            raise ValueError("TRANSIT_SINGLE_REQUIRES_ONE_VALUE")
+        if self.transit_binding == "ALTERNATIVES" and (len(options) < 2 or len(options) != len(set(options))):
+            raise ValueError("TRANSIT_ALTERNATIVES_REQUIRE_DISTINCT_VALUES")
+        if self.transit_binding == "CONFIRMED_RANGE" and (len(options) != 2 or options[0] > options[1]):
+            raise ValueError("TRANSIT_RANGE_INVALID")
+        return self
 
 
 class RouteNode(Contract):
@@ -441,6 +482,9 @@ class ExtractionOutput(Contract):
             for p in r.price_profiles:
                 refs.extend(p.evidence_ids)
             for provenance in r.field_provenance.values():
+                if (provenance.origin == ProvenanceOrigin.MANUAL or provenance.recorded_by is not None
+                        or provenance.recorded_at is not None):
+                    raise ValueError("MODEL_CANNOT_CLAIM_HUMAN_PROVENANCE")
                 refs.extend(provenance.evidence_ids)
         if not set(refs).issubset(known):
             raise ValueError("DANGLING_EVIDENCE")
@@ -465,6 +509,13 @@ class QuotationValues(Contract):
     remarks: str | None = None
     price_scope_summary: str | None = None
     condition_keys: list[str] = Field(default_factory=list)
+
+    @field_validator("source_code", "service_name", "price_profile_key", "remarks", "price_scope_summary")
+    @classmethod
+    def no_empty_unknown(cls, value):
+        if value is not None and not value.strip():
+            raise ValueError("EMPTY_VALUE_USE_NULL")
+        return value
 
 
 class Candidate(Contract):
@@ -613,7 +664,11 @@ def patch_proposal(current: QuotationValues, patch: CandidatePatch) -> Quotation
 
 
 def edit_candidate(candidate: Candidate, request: PatchRequest) -> Candidate:
-    """Pure in-memory transition contract; no database write or application occurs."""
+    """Legacy T02 fixture transition only; production commands use domain.candidates.
+
+    This helper does not record human provenance or an audit intention. Never
+    persist its output as the implementation of a real candidate edit endpoint.
+    """
     if request.expected_version != candidate.version:
         raise ValueError("VERSION_CONFLICT")
     if candidate.application_state != ApplicationState.NOT_APPLIED:
@@ -632,7 +687,7 @@ def edit_candidate(candidate: Candidate, request: PatchRequest) -> Candidate:
 
 def derive_two_prices(first: Money, second: Money, *, confirmed_20gp_40ft: bool,
                       evidence_ids: list[UUID]) -> tuple[QuotationValues, Provenance]:
-    if not confirmed_20gp_40ft or not evidence_ids:
+    if confirmed_20gp_40ft is not True or not evidence_ids:
         raise ValueError("TWO_PRICE_HEADERS_NOT_CONFIRMED")
     values = QuotationValues(price_20gp=first, price_40gp=second, price_40hq=second)
     provenance = Provenance(raw_value=second, normalized_value=second,
@@ -642,13 +697,16 @@ def derive_two_prices(first: Money, second: Money, *, confirmed_20gp_40ft: bool,
 
 
 def scaled_money(amount: str) -> int:
-    # Reuse wire validation before integer persistence; never binary float arithmetic.
-    validated = QuotationValues(price_20gp=amount).price_20gp
-    return int(Decimal(validated) * 10000)
+    # Independent of the ambient Decimal precision / rounding context.
+    from .values import MoneyAmount
+    return MoneyAmount(amount).scaled
 
 
 def gate_issues(candidate: Candidate, *, qingdao_origin_id: UUID) -> list[Issue]:
-    """Contract-level gates. Later services must also verify DB identity and plan versions."""
+    """Legacy T02 subset for fixtures; real commands use validation.action_blockers.
+
+    This subset does not validate provenance, dates or container applicability.
+    """
     result = []
     def add(code, fields, actions):
         result.append(Issue(code=code, field_paths=fields, message=code,
@@ -683,6 +741,7 @@ class ContractBundle(Contract):
     error: ErrorResponse
     job_state: JobState
     change_action: ChangeAction
+    container_type: ContainerType
     destination: DestinationRef
     directory: DestinationDirectory
     health: HealthResponse

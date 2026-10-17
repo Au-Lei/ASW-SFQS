@@ -2,7 +2,7 @@
 
 面向国际海运物流业务的报价维护与检索网页系统，第一版维护青岛港六区域报价。
 
-当前完成 **T01—T05：样本基准、数据合同、港口目录与样式、前后端工程、数据库结构与迁移**。页面可查看六区域预置目录和服务状态；数据库结构已可初始化，正式报价数据、上传识别、审核更新及导出仍在后续任务实现。下一步是T06。
+当前完成 **T01—T06：样本基准、数据合同、港口目录与样式、前后端工程、数据库迁移、领域规则与状态校验**。页面可查看六区域预置目录和服务状态；数据库结构已可初始化，候选编辑及审核规则可运行测试，业务接口、正式报价数据、上传识别及导出仍在后续任务实现。下一步是T07。
 
 ## 开发入口
 
@@ -14,6 +14,8 @@
 - [安装、启动与验证](docs/T04-工程启动与验证说明.md)
 - [数据库设计与迁移](docs/T05-数据库设计与迁移说明.md)
 - [T05完成报告](docs/T05-数据层与数据库迁移完成报告.md)
+- [领域规则与审核状态](docs/T06-领域规则与状态校验说明.md)
+- [T06完成报告](docs/T06-领域校验与状态机完成报告.md)
 
 ## 目录
 
@@ -66,6 +68,7 @@ uv run --frozen python -m backend.app.repositories.cli check
 ```powershell
 uv run --frozen python -m unittest discover -s tests/system -v
 uv run --frozen python -m unittest discover -s tests/database -v
+uv run --frozen python -m unittest discover -s tests/domain -v
 uv run --frozen python -m unittest discover -s tests/contracts -v
 uv run --frozen python -m unittest discover -s tests/template_assets -v
 uv run --frozen python contracts/generate.py --check

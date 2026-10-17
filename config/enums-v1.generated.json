@@ -13,6 +13,11 @@
     "NO_CHANGE",
     "EXCLUDE"
   ],
+  "ContainerType": [
+    "20GP",
+    "40GP",
+    "40HQ"
+  ],
   "DateBasis": [
     "UNSPECIFIED",
     "ETD",
@@ -32,6 +37,13 @@
   "ExportMode": [
     "FULL",
     "FILTERED"
+  ],
+  "IssueAction": [
+    "APPLY",
+    "COMPARE",
+    "EXPORT",
+    "REVIEW",
+    "DATE_FILTER"
   ],
   "JobState": [
     "QUEUED",

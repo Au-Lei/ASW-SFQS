@@ -6,6 +6,7 @@ from sqlalchemy import BigInteger, DateTime
 from sqlalchemy.types import TypeDecorator
 
 from backend.app.domain.contracts import scaled_money
+from backend.app.domain.values import MoneyAmount
 
 
 class Money(TypeDecorator):
@@ -21,7 +22,7 @@ class Money(TypeDecorator):
         return scaled_money(format(value, "f") if isinstance(value, Decimal) else value)
 
     def process_result_value(self, value, dialect):
-        return None if value is None else Decimal(value).scaleb(-4)
+        return None if value is None else MoneyAmount.from_scaled(value).decimal
 
 
 class UTCDateTime(TypeDecorator):
