@@ -30,7 +30,9 @@ class Settings(BaseSettings):
         if self.app_port == self.frontend_port:
             raise ValueError("APP_PORT and FRONTEND_PORT must differ")
         if not self.database_url.startswith("sqlite:///"):
-            raise ValueError("T04 local mode expects a local SQLite URL; no database is created yet")
+            raise ValueError("V1 local mode expects a local SQLite URL")
+        from backend.app.repositories.database import database_path
+        database_path(self.database_url)
         if not self.storage_root.is_absolute():
             self.storage_root = (ROOT/self.storage_root).resolve()
         return self

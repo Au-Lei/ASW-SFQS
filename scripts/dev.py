@@ -31,7 +31,7 @@ def health_ready(port):
     opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
     try:
         with opener.open(f"http://127.0.0.1:{port}/api/v1/health",timeout=1) as response:
-            return response.status==200 and json.load(response).get("stage")=="T04"
+            return response.status==200 and json.load(response).get("status")=="ok"
     except (OSError,ValueError):
         return False
 

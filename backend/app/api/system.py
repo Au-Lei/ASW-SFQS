@@ -1,4 +1,4 @@
-"""T04 bootstrap only; directory and quotation repositories are later tasks."""
+"""System endpoints; T05 schema readiness is distinct from T08 data import."""
 import hashlib
 import json
 from typing import Annotated
@@ -9,6 +9,7 @@ from fastapi.security import APIKeyCookie
 from backend.app.core.boundary import COOKIE_NAME
 from backend.app.core.settings import ROOT
 from backend.app.domain.contracts import BootstrapResponse, HealthResponse, SessionResponse
+from backend.app.repositories.database import schema_status
 
 
 def load_seed_summary():
@@ -36,7 +37,7 @@ session_cookie_schema=APIKeyCookie(name=COOKIE_NAME,scheme_name="LocalSessionCoo
 
 @router.get("/health",response_model=HealthResponse)
 def health(request: Request):
-    return HealthResponse(status="ok",version="0.1.0",stage="T04",database_status="NOT_INITIALIZED",
+    return HealthResponse(status="ok",version="0.1.0",stage="T05",database_status=schema_status(request.app.state.settings.database_url),
                           model_status=request.app.state.settings.model_status)
 
 

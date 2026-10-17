@@ -2,7 +2,7 @@
 
 面向国际海运物流业务的报价维护与检索网页系统，第一版维护青岛港六区域报价。
 
-当前完成 **T01—T04：样本基准、数据合同、港口目录与样式、可运行的前后端工程**。页面可查看六区域预置目录和服务状态；正式报价数据库、上传识别、审核更新及导出仍在后续任务实现。下一步是T05。
+当前完成 **T01—T05：样本基准、数据合同、港口目录与样式、前后端工程、数据库结构与迁移**。页面可查看六区域预置目录和服务状态；数据库结构已可初始化，正式报价数据、上传识别、审核更新及导出仍在后续任务实现。下一步是T06。
 
 ## 开发入口
 
@@ -12,12 +12,15 @@
 - [目录、样式与迁移说明](docs/T03-目录样式与迁移说明.md)
 - [配置与种子维护](config/README.md)
 - [安装、启动与验证](docs/T04-工程启动与验证说明.md)
+- [数据库设计与迁移](docs/T05-数据库设计与迁移说明.md)
+- [T05完成报告](docs/T05-数据层与数据库迁移完成报告.md)
 
 ## 目录
 
 | 位置 | 内容 |
 |---|---|
 | `backend/app/domain/` | 共用字段模型、金额日期规则和动态排版 |
+| `backend/app/repositories/`、`backend/migrations/` | 数据实体、精确存储、事务、版本快照及显式迁移 |
 | `backend/app/api/`、`backend/app/core/` | 实际运行的系统接口、本机访问边界和配置 |
 | `frontend/` | React + TypeScript + Vite基础工作台 |
 | `contracts/` | JSON Schema、OpenAPI、共用TypeScript类型及合成示例 |
@@ -50,8 +53,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1
 
 ## 运行检查
 
+首次显式初始化数据库结构（不会导入目录或报价）：
+
+```powershell
+uv run --frozen python -m backend.app.repositories.cli upgrade
+uv run --frozen python -m backend.app.repositories.cli status
+uv run --frozen python -m backend.app.repositories.cli check
+```
+
+网页启动不自动升级；已有已知版本升级先备份。操作方式与恢复步骤见[迁移说明](docs/T05-数据库设计与迁移说明.md)。
+
 ```powershell
 uv run --frozen python -m unittest discover -s tests/system -v
+uv run --frozen python -m unittest discover -s tests/database -v
 uv run --frozen python -m unittest discover -s tests/contracts -v
 uv run --frozen python -m unittest discover -s tests/template_assets -v
 uv run --frozen python contracts/generate.py --check

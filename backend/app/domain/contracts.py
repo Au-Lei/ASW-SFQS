@@ -567,8 +567,8 @@ class ErrorResponse(Contract):
 class HealthResponse(Contract):
     status: Literal["ok"]
     version: str
-    stage: Literal["T04"]
-    database_status: Literal["NOT_INITIALIZED"]
+    stage: Literal["T05"]
+    database_status: Literal["NOT_INITIALIZED", "READY", "OUTDATED", "UNAVAILABLE"]
     model_status: Literal["NOT_CONFIGURED", "ADAPTER_NOT_IMPLEMENTED"]
 
 

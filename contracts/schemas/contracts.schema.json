@@ -1464,12 +1464,17 @@
           "type": "string"
         },
         "stage": {
-          "const": "T04",
+          "const": "T05",
           "title": "Stage",
           "type": "string"
         },
         "database_status": {
-          "const": "NOT_INITIALIZED",
+          "enum": [
+            "NOT_INITIALIZED",
+            "READY",
+            "OUTDATED",
+            "UNAVAILABLE"
+          ],
           "title": "Database Status",
           "type": "string"
         },

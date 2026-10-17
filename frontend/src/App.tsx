@@ -247,7 +247,7 @@ export default function App() {
                   <div>
                     <strong className="pending-value">待接入</strong>
                   </div>
-                  <p>报价数据库尚未初始化</p>
+                  <p>正式报价尚未接入</p>
                   <span className="neutral-tag">尚未启用</span>
                 </div>
               </section>

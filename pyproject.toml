@@ -4,9 +4,11 @@ version = "0.1.0"
 description = "Qingdao ocean freight quotation workspace"
 requires-python = ">=3.12,<3.14"
 dependencies = [
+  "alembic==1.20.0",
   "fastapi==0.143.3",
   "pydantic==2.14.0",
   "pydantic-settings==2.16.0",
+  "sqlalchemy==2.0.55",
   "uvicorn==0.54.0",
 ]
 

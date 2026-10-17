@@ -4,6 +4,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 import json
 from pathlib import Path
+from uuid import uuid4
 import tempfile
 import unittest
 
@@ -20,6 +21,7 @@ ORIGIN="http://127.0.0.1:5173"
 
 
 def settings(**kwargs):
+    kwargs.setdefault("database_url", "sqlite:///./data/test-tmp/missing-" + uuid4().hex + ".sqlite3")
     return Settings(_env_file=None,app_port=8000,frontend_port=5173,**kwargs)
 
 
