@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "document_context": {"title_raw":"合成测试报价，非真实商用价格","source_updated_on":"2026-10-01","validity":{"valid_from":"2026-10-26","valid_to":"2026-11-01","basis":"ETD"}},
+  "records": [{
+    "record_key":"row-1-service-A-terminal-A", "physical_row_key":"row-1",
+    "origin_raw":null, "destination":{"raw_name":"EXAMPLE CITY TERMINAL A","kind":"TERMINAL","terminal_name":"TERMINAL A"},
+    "carrier_raw":"TEST", "currency":null, "service_raw":"SERVICE-A",
+    "schedule":{"raw_text":"周三/周日","weekdays":[3,7],"transit_days_raw":"2/4","transit_day_options":[2,4],"transit_binding":"ALTERNATIVES"},
+    "price_profiles":[
+      {"profile_key":"LEFT_QUOTE","label_raw":"左侧报价","container_binding":"EXPLICIT","cells":{"left20":{"kind":"LITERAL_COMPONENT","raw_text":"123含BY","amount":"123","qualifier_raw":"含BY"},"left40":{"kind":"LITERAL_COMPONENT","raw_text":"234含BY","amount":"234","qualifier_raw":"含BY"}},"container_map":{"left20":"20GP","left40":"40GP_AND_40HQ"},"evidence_ids":["00000000-0000-4000-8000-000000000001"]},
+      {"profile_key":"G_KEY_ACCOUNT_SETTLEMENT","label_raw":"G大客户结算","container_binding":"UNCONFIRMED","cells":{"g1":{"kind":"REFERENCE_PLUS_ADDON","raw_text":"BASE+12","reference_raw":"BASE","addon":"12"}},"evidence_ids":["00000000-0000-4000-8000-000000000001"]},
+      {"profile_key":"R_QUOTE","label_raw":"R报价","container_binding":"UNCONFIRMED","cells":{"r1":{"kind":"PAIR_UNASSIGNED","raw_text":"345/456","tokens":["345","456"]}},"evidence_ids":["00000000-0000-4000-8000-000000000001"]},
+      {"profile_key":"R_SETTLEMENT","label_raw":"R结算","container_binding":"UNCONFIRMED","cells":{"r2":{"kind":"MISSING","raw_text":"--"}},"evidence_ids":["00000000-0000-4000-8000-000000000001"]}
+    ],
+    "evidence_ids":["00000000-0000-4000-8000-000000000001"], "condition_keys":["lss-1"]
+  }],
+  "conditions":[{"key":"lss-1","raw_text":"LSS USD 12/24，默认到付；主价币种未写","scope":"RECORD","target_keys":["row-1-service-A-terminal-A"],"currency":"USD","payment_raw":"默认到付","evidence_ids":["00000000-0000-4000-8000-000000000001"]}],
+  "evidence":[{"id":"00000000-0000-4000-8000-000000000001","file_id":"00000000-0000-4000-8000-000000000002","original_text":"合成证据，仅用于测试","location":{"kind":"IMAGE_REGION","page_no":1,"bbox":[0.1,0.2,0.9,0.3]}}],
+  "issues":[]
+}

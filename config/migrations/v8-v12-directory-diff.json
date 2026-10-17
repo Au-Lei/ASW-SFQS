@@ -1,0 +1,302 @@
+{
+  "schema_version": "qingdao.directory-diff.1",
+  "v8_sha256": "9bed77356ca6cba8a5558e8ac61d3a340d94fe3567ccb12a3b1e2f41f21a220b",
+  "v12_sha256": "c0a965d419f18909c4a1f09e54c53d1a8a996f98fe5534adc8773d2780aa6425",
+  "summary": {
+    "baseline_destination_rows": 295,
+    "latest_destination_rows": 316,
+    "latest_distinct_keys": 315,
+    "common_keys": 294,
+    "added_keys": 21,
+    "absent_baseline_keys": 1,
+    "extra_quote_rows_same_destination": 1,
+    "baseline_route_groups": 34,
+    "added_route_groups": 3
+  },
+  "added": [
+    {
+      "canonical_key": "ITALY|NAPLES",
+      "country_en": "ITALY",
+      "country_zh": "意大利",
+      "name_en": "NAPLES",
+      "name_zh": "那不勒斯",
+      "sheet": "欧洲航线",
+      "route": "地西基本港",
+      "row": 39
+    },
+    {
+      "canonical_key": "MALTA|MARSAXLOKK",
+      "country_en": "MALTA",
+      "country_zh": "马耳他",
+      "name_en": "MARSAXLOKK",
+      "name_zh": "马尔萨什洛克",
+      "sheet": "欧洲航线",
+      "route": "地西基本港",
+      "row": 43
+    },
+    {
+      "canonical_key": "TURKEY|DERINCE (SAFI)",
+      "country_en": "TURKEY",
+      "country_zh": "土耳其",
+      "name_en": "DERINCE (SAFI)",
+      "name_zh": "代林杰（SAFI码头）",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 53
+    },
+    {
+      "canonical_key": "TURKEY|ALIAGA",
+      "country_en": "TURKEY",
+      "country_zh": "土耳其",
+      "name_en": "ALIAGA",
+      "name_zh": "阿利亚加",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 54
+    },
+    {
+      "canonical_key": "EGYPT|ALEXANDRIA (ABU QIR)",
+      "country_en": "EGYPT",
+      "country_zh": "埃及",
+      "name_en": "ALEXANDRIA (ABU QIR)",
+      "name_zh": "亚历山大（ABU QIR码头）",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 59
+    },
+    {
+      "canonical_key": "EGYPT|ALEXANDRIA (TMT)",
+      "country_en": "EGYPT",
+      "country_zh": "埃及",
+      "name_en": "ALEXANDRIA (TMT)",
+      "name_zh": "亚历山大（TMT码头）",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 60
+    },
+    {
+      "canonical_key": "EGYPT|PORT SAID",
+      "country_en": "EGYPT",
+      "country_zh": "埃及",
+      "name_en": "PORT SAID",
+      "name_zh": "塞得港",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 61
+    },
+    {
+      "canonical_key": "ROMANIA|CONSTANTA",
+      "country_en": "ROMANIA",
+      "country_zh": "罗马尼亚",
+      "name_en": "CONSTANTA",
+      "name_zh": "康斯坦察",
+      "sheet": "欧洲航线",
+      "route": "黑海航线",
+      "row": 101
+    },
+    {
+      "canonical_key": "BULGARIA|VARNA",
+      "country_en": "BULGARIA",
+      "country_zh": "保加利亚",
+      "name_en": "VARNA",
+      "name_zh": "瓦尔纳",
+      "sheet": "欧洲航线",
+      "route": "黑海航线",
+      "row": 103
+    },
+    {
+      "canonical_key": "BULGARIA|BURGAS",
+      "country_en": "BULGARIA",
+      "country_zh": "保加利亚",
+      "name_en": "BURGAS",
+      "name_zh": "布尔加斯",
+      "sheet": "欧洲航线",
+      "route": "黑海航线",
+      "row": 104
+    },
+    {
+      "canonical_key": "GEORGIA|POTI",
+      "country_en": "GEORGIA",
+      "country_zh": "格鲁吉亚",
+      "name_en": "POTI",
+      "name_zh": "波季",
+      "sheet": "欧洲航线",
+      "route": "黑海航线",
+      "row": 106
+    },
+    {
+      "canonical_key": "CHINA|TAIPEI",
+      "country_en": "CHINA",
+      "country_zh": "中国",
+      "name_en": "TAIPEI",
+      "name_zh": "台北",
+      "sheet": "亚洲航线",
+      "route": "中国港台航线",
+      "row": 23
+    },
+    {
+      "canonical_key": "CHINA|TAOYUAN",
+      "country_en": "CHINA",
+      "country_zh": "中国",
+      "name_en": "TAOYUAN",
+      "name_zh": "桃园",
+      "sheet": "亚洲航线",
+      "route": "中国港台航线",
+      "row": 24
+    },
+    {
+      "canonical_key": "MALAYSIA|BINTULU",
+      "country_en": "MALAYSIA",
+      "country_zh": "马来西亚",
+      "name_en": "BINTULU",
+      "name_zh": "民都鲁",
+      "sheet": "亚洲航线",
+      "route": "新马航线",
+      "row": 39
+    },
+    {
+      "canonical_key": "MALAYSIA|MIRI",
+      "country_en": "MALAYSIA",
+      "country_zh": "马来西亚",
+      "name_en": "MIRI",
+      "name_zh": "米里",
+      "sheet": "亚洲航线",
+      "route": "新马航线",
+      "row": 40
+    },
+    {
+      "canonical_key": "MALAYSIA|LABUAN",
+      "country_en": "MALAYSIA",
+      "country_zh": "马来西亚",
+      "name_en": "LABUAN",
+      "name_zh": "纳闽岛",
+      "sheet": "亚洲航线",
+      "route": "新马航线",
+      "row": 42
+    },
+    {
+      "canonical_key": "INDONESIA|PANJANG",
+      "country_en": "INDONESIA",
+      "country_zh": "印度尼西亚",
+      "name_en": "PANJANG",
+      "name_zh": "潘姜",
+      "sheet": "亚洲航线",
+      "route": "印尼航线",
+      "row": 79
+    },
+    {
+      "canonical_key": "VIETNAM|CAI MEP",
+      "country_en": "VIETNAM",
+      "country_zh": "越南",
+      "name_en": "CAI MEP",
+      "name_zh": "盖梅港",
+      "sheet": "亚洲航线",
+      "route": "越南航线",
+      "row": 88
+    },
+    {
+      "canonical_key": "BRUNEI|MUARA",
+      "country_en": "BRUNEI",
+      "country_zh": "文莱",
+      "name_en": "MUARA",
+      "name_zh": "穆阿拉港",
+      "sheet": "亚洲航线",
+      "route": "文莱航线",
+      "row": 90
+    },
+    {
+      "canonical_key": "CAMBODIA|SIHANOUKVILLE",
+      "country_en": "CAMBODIA",
+      "country_zh": "柬埔寨",
+      "name_en": "SIHANOUKVILLE",
+      "name_zh": "西哈努克",
+      "sheet": "亚洲航线",
+      "route": "柬埔寨航线",
+      "row": 92
+    },
+    {
+      "canonical_key": "CAMBODIA|PHNOM PENH",
+      "country_en": "CAMBODIA",
+      "country_zh": "柬埔寨",
+      "name_en": "PHNOM PENH",
+      "name_zh": "金边",
+      "sheet": "亚洲航线",
+      "route": "柬埔寨航线",
+      "row": 93
+    }
+  ],
+  "absent_from_v12": [
+    {
+      "canonical_key": "EGYPT|ALEXANDRIA",
+      "country_en": "EGYPT",
+      "country_zh": "埃及",
+      "name_en": "ALEXANDRIA",
+      "name_zh": "亚历山大",
+      "sheet": "欧洲航线",
+      "route": "地东港口",
+      "row": 54,
+      "decision": "KEEP_PARENT_IDENTITY_NO_IMPLICIT_DELETE"
+    }
+  ],
+  "moved": [],
+  "renamed_zh": [],
+  "added_route_groups": [
+    {
+      "sheet": "欧洲航线",
+      "name": "黑海航线",
+      "id": "70372099-8d11-5a7c-a2f0-4b2518f21649",
+      "status": "MIGRATION_PROPOSAL"
+    },
+    {
+      "sheet": "亚洲航线",
+      "name": "文莱航线",
+      "id": "1661e8ed-f685-5002-ad8b-130f2f886e7d",
+      "status": "MIGRATION_PROPOSAL"
+    },
+    {
+      "sheet": "亚洲航线",
+      "name": "柬埔寨航线",
+      "id": "c930e6ae-7859-550f-9647-e59453ed9707",
+      "status": "MIGRATION_PROPOSAL"
+    }
+  ],
+  "duplicate_destination_rows": [
+    {
+      "canonical_key": "MALAYSIA|LABUAN",
+      "rows": [
+        {
+          "canonical_key": "MALAYSIA|LABUAN",
+          "country_en": "MALAYSIA",
+          "country_zh": "马来西亚",
+          "name_en": "LABUAN",
+          "name_zh": "纳闽岛",
+          "sheet": "亚洲航线",
+          "route": "新马航线",
+          "row": 41
+        },
+        {
+          "canonical_key": "MALAYSIA|LABUAN",
+          "country_en": "MALAYSIA",
+          "country_zh": "马来西亚",
+          "name_en": "LABUAN",
+          "name_zh": "纳闽岛",
+          "sheet": "亚洲航线",
+          "route": "新马航线",
+          "row": 42
+        }
+      ],
+      "decision": "ONE_DESTINATION_MULTIPLE_QUOTES_KEEP_BOTH"
+    }
+  ],
+  "identity_decisions": [
+    {
+      "parent_key": "EGYPT|ALEXANDRIA",
+      "child_keys": [
+        "EGYPT|ALEXANDRIA (ABU QIR)",
+        "EGYPT|ALEXANDRIA (TMT)"
+      ],
+      "decision": "PROPOSE_TERMINAL_CHILDREN_RETAIN_PARENT_NO_PARENT_PRICE_FANOUT"
+    }
+  ],
+  "activation_policy": "DO_NOT_AUTO_ACTIVATE_V12_ADDITIONS_OR_APPLY_QUOTES_IN_T03"
+}

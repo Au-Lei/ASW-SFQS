@@ -1,0 +1,19 @@
+# Business quotations, source images and manually annotated goldens are private.
+/tests/fixtures/private/
+# Historical workbooks, quotation previews and one-off scripts can contain real rates.
+/outputs/
+/data/
+/.env
+/.env.local
+/.env.*
+!/.env.example
+*.pem
+*.key
+**/.DS_Store
+**/Thumbs.db
+**/__pycache__/
+*.pyc
+/.venv/
+**/node_modules/
+**/.pytest_cache/
+/frontend/dist/

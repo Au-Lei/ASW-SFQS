@@ -1,0 +1,3331 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "青岛海运报价 V1 数据合同",
+    "version": "1.0.0",
+    "description": "T02合同草案；无运行中服务器。跨字段业务验证由后端执行。"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/candidates/{id}": {
+      "get": {
+        "operationId": "get_candidates_by_id",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Candidate"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patch_candidates_by_id",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Candidate"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/{id}/review": {
+      "post": {
+        "operationId": "post_candidates_by_id_review",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Candidate"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/change-plans/{id}": {
+      "get": {
+        "operationId": "get_change-plans_by_id",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangePlan"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/change-plans/{id}/apply": {
+      "post": {
+        "operationId": "post_change-plans_by_id_apply",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplyResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exports": {
+      "post": {
+        "operationId": "post_exports",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功；仅合同，路由尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportAccepted"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误结构",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "请求追踪ID",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "APIError": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "enum": [
+              "BAD_REQUEST",
+              "NOT_FOUND",
+              "VERSION_CONFLICT",
+              "PLAN_STALE",
+              "IDEMPOTENCY_KEY_REUSED",
+              "ACTION_BLOCKED",
+              "VALIDATION_ERROR",
+              "PAYLOAD_TOO_LARGE",
+              "INTERNAL_ERROR"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "details": {
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "title": "Details",
+            "type": "array"
+          },
+          "request_id": {
+            "minLength": 1,
+            "title": "Request Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "request_id"
+        ],
+        "title": "APIError",
+        "type": "object"
+      },
+      "ApplicationState": {
+        "enum": [
+          "NOT_APPLIED",
+          "APPLIED",
+          "NO_CHANGE",
+          "EXCLUDED"
+        ],
+        "title": "ApplicationState",
+        "type": "string"
+      },
+      "ApplyRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_plan_version": {
+            "minimum": 1,
+            "title": "Expected Plan Version",
+            "type": "integer"
+          },
+          "expected_dataset_version": {
+            "minimum": 1,
+            "title": "Expected Dataset Version",
+            "type": "integer"
+          },
+          "snapshot_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Snapshot Hash",
+            "type": "string"
+          }
+        },
+        "required": [
+          "expected_plan_version",
+          "expected_dataset_version",
+          "snapshot_hash"
+        ],
+        "title": "ApplyRequest",
+        "type": "object"
+      },
+      "ApplyResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "application_id": {
+            "format": "uuid",
+            "title": "Application Id",
+            "type": "string"
+          },
+          "dataset_version": {
+            "minimum": 1,
+            "title": "Dataset Version",
+            "type": "integer"
+          },
+          "snapshot_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Snapshot Hash",
+            "type": "string"
+          },
+          "applied_count": {
+            "minimum": 0,
+            "title": "Applied Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "application_id",
+          "dataset_version",
+          "snapshot_hash",
+          "applied_count"
+        ],
+        "title": "ApplyResponse",
+        "type": "object"
+      },
+      "Candidate": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "batch_id": {
+            "format": "uuid",
+            "title": "Batch Id",
+            "type": "string"
+          },
+          "source_group_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Group Id"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Run Id"
+          },
+          "raw_payload": {
+            "additionalProperties": true,
+            "title": "Raw Payload",
+            "type": "object"
+          },
+          "normalized_payload": {
+            "$ref": "#/components/schemas/QuotationValues"
+          },
+          "field_provenance": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Provenance"
+            },
+            "title": "Field Provenance",
+            "type": "object"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "title": "Issues",
+            "type": "array"
+          },
+          "review_state": {
+            "$ref": "#/components/schemas/ReviewState",
+            "default": "PENDING_REVIEW"
+          },
+          "match_state": {
+            "$ref": "#/components/schemas/MatchState",
+            "default": "UNMATCHED"
+          },
+          "application_state": {
+            "$ref": "#/components/schemas/ApplicationState",
+            "default": "NOT_APPLIED"
+          },
+          "disposition": {
+            "default": "INCLUDE",
+            "enum": [
+              "INCLUDE",
+              "DEFER",
+              "EXCLUDE"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "version": {
+            "default": 1,
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "review_version": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Review Version"
+          },
+          "reviewed_payload_hash": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Reviewed Payload Hash"
+          },
+          "reviewed_by": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Reviewed By"
+          },
+          "reviewed_at": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(Z|[+-][0-9]{2}:[0-9]{2})$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Reviewed At"
+          }
+        },
+        "required": [
+          "id",
+          "batch_id",
+          "raw_payload",
+          "normalized_payload",
+          "field_provenance",
+          "issues"
+        ],
+        "title": "Candidate",
+        "type": "object"
+      },
+      "CandidatePatch": {
+        "additionalProperties": false,
+        "properties": {
+          "origin_port_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Origin Port Id"
+          },
+          "destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Destination Id"
+          },
+          "carrier_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Carrier Id"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Id"
+          },
+          "source_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Code"
+          },
+          "service_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Service Name"
+          },
+          "price_profile_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price Profile Key"
+          },
+          "price_20gp": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 20Gp"
+          },
+          "price_40gp": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 40Gp"
+          },
+          "price_40hq": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 40Hq"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Currency"
+          },
+          "validity": {
+            "$ref": "#/components/schemas/Validity"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "routing": {
+            "$ref": "#/components/schemas/Routing"
+          },
+          "remarks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Remarks"
+          },
+          "price_scope_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price Scope Summary"
+          },
+          "condition_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Condition Keys",
+            "type": "array"
+          }
+        },
+        "title": "CandidatePatch",
+        "type": "object"
+      },
+      "CellLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "XLSX_CELL",
+            "title": "Kind",
+            "type": "string"
+          },
+          "sheet_name": {
+            "minLength": 1,
+            "title": "Sheet Name",
+            "type": "string"
+          },
+          "cell_range": {
+            "pattern": "^[A-Z]+[1-9][0-9]*(:[A-Z]+[1-9][0-9]*)?$",
+            "title": "Cell Range",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "sheet_name",
+          "cell_range"
+        ],
+        "title": "CellLocation",
+        "type": "object"
+      },
+      "ChangeAction": {
+        "enum": [
+          "CREATE_QUOTE",
+          "UPDATE_QUOTE",
+          "LINK_EVIDENCE",
+          "ARCHIVE_QUOTE",
+          "NO_CHANGE",
+          "EXCLUDE"
+        ],
+        "title": "ChangeAction",
+        "type": "string"
+      },
+      "ChangePlan": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/PlanState"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "dataset_version": {
+            "minimum": 1,
+            "title": "Dataset Version",
+            "type": "integer"
+          },
+          "candidate_versions": {
+            "additionalProperties": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "title": "Candidate Versions",
+            "type": "object"
+          },
+          "snapshot_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Snapshot Hash",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "version",
+          "dataset_version",
+          "candidate_versions",
+          "snapshot_hash"
+        ],
+        "title": "ChangePlan",
+        "type": "object"
+      },
+      "Condition": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "minLength": 1,
+            "title": "Key",
+            "type": "string"
+          },
+          "raw_text": {
+            "minLength": 1,
+            "title": "Raw Text",
+            "type": "string"
+          },
+          "scope": {
+            "enum": [
+              "DOCUMENT",
+              "GROUP",
+              "RECORD",
+              "PROFILE",
+              "CONTAINER"
+            ],
+            "title": "Scope",
+            "type": "string"
+          },
+          "target_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Target Keys",
+            "type": "array"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Currency"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Amount"
+          },
+          "unit_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit Raw"
+          },
+          "payment_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Payment Raw"
+          },
+          "exception_target_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exception Target Keys",
+            "type": "array"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "key",
+          "raw_text",
+          "scope",
+          "target_keys",
+          "evidence_ids"
+        ],
+        "title": "Condition",
+        "type": "object"
+      },
+      "DateBasis": {
+        "enum": [
+          "UNSPECIFIED",
+          "ETD",
+          "BOOKING_DATE",
+          "GATE_IN_DATE",
+          "QUOTATION_DATE",
+          "OTHER"
+        ],
+        "title": "DateBasis",
+        "type": "string"
+      },
+      "Destination": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_key": {
+            "minLength": 1,
+            "title": "Canonical Key",
+            "type": "string"
+          },
+          "country_region_id": {
+            "format": "uuid",
+            "title": "Country Region Id",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/DestinationKind"
+          },
+          "parent_destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Parent Destination Id"
+          },
+          "display_name_en": {
+            "minLength": 1,
+            "title": "Display Name En",
+            "type": "string"
+          },
+          "display_name_zh": {
+            "minLength": 1,
+            "title": "Display Name Zh",
+            "type": "string"
+          },
+          "route_group_id": {
+            "format": "uuid",
+            "title": "Route Group Id",
+            "type": "string"
+          },
+          "version": {
+            "default": 1,
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "active": {
+            "default": true,
+            "title": "Active",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "canonical_key",
+          "country_region_id",
+          "kind",
+          "display_name_en",
+          "display_name_zh",
+          "route_group_id"
+        ],
+        "title": "Destination",
+        "type": "object"
+      },
+      "DestinationDirectory": {
+        "additionalProperties": false,
+        "properties": {
+          "destinations": {
+            "items": {
+              "$ref": "#/components/schemas/Destination"
+            },
+            "title": "Destinations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "destinations"
+        ],
+        "title": "DestinationDirectory",
+        "type": "object"
+      },
+      "DestinationKind": {
+        "enum": [
+          "SEAPORT",
+          "TERMINAL",
+          "ICD",
+          "INLAND_POINT",
+          "CITY_SCOPE",
+          "UNKNOWN"
+        ],
+        "title": "DestinationKind",
+        "type": "string"
+      },
+      "DestinationRef": {
+        "additionalProperties": false,
+        "properties": {
+          "raw_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Raw Name"
+          },
+          "country_en": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Country En"
+          },
+          "country_zh": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Country Zh"
+          },
+          "name_en": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Name En"
+          },
+          "name_zh": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Name Zh"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/DestinationKind",
+            "default": "UNKNOWN"
+          },
+          "terminal_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Terminal Name"
+          },
+          "destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Destination Id"
+          },
+          "parent_destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Parent Destination Id"
+          },
+          "route_group_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Route Group Id"
+          },
+          "codes": {
+            "items": {
+              "$ref": "#/components/schemas/LocationCode"
+            },
+            "title": "Codes",
+            "type": "array"
+          }
+        },
+        "title": "DestinationRef",
+        "type": "object"
+      },
+      "DocumentContext": {
+        "additionalProperties": false,
+        "properties": {
+          "title_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Title Raw"
+          },
+          "source_updated_on": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Updated On"
+          },
+          "origin_scope_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Origin Scope Raw"
+          },
+          "validity": {
+            "$ref": "#/components/schemas/Validity"
+          }
+        },
+        "title": "DocumentContext",
+        "type": "object"
+      },
+      "ErrorDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "field_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Field Path"
+          },
+          "code": {
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorDetail",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/APIError"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "file_id": {
+            "format": "uuid",
+            "title": "File Id",
+            "type": "string"
+          },
+          "field_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Field Path"
+          },
+          "original_text": {
+            "title": "Original Text",
+            "type": "string"
+          },
+          "location": {
+            "discriminator": {
+              "mapping": {
+                "IMAGE_REGION": "#/components/schemas/ImageLocation",
+                "TEXT_SPAN": "#/components/schemas/TextLocation",
+                "XLSX_CELL": "#/components/schemas/CellLocation"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CellLocation"
+              },
+              {
+                "$ref": "#/components/schemas/ImageLocation"
+              },
+              {
+                "$ref": "#/components/schemas/TextLocation"
+              }
+            ],
+            "title": "Location"
+          }
+        },
+        "required": [
+          "id",
+          "file_id",
+          "original_text",
+          "location"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "ExportAccepted": {
+        "additionalProperties": false,
+        "properties": {
+          "job_id": {
+            "format": "uuid",
+            "title": "Job Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id"
+        ],
+        "title": "ExportAccepted",
+        "type": "object"
+      },
+      "ExportMode": {
+        "enum": [
+          "FULL",
+          "FILTERED"
+        ],
+        "title": "ExportMode",
+        "type": "string"
+      },
+      "ExportRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/ExportMode"
+          },
+          "dataset_version": {
+            "minimum": 1,
+            "title": "Dataset Version",
+            "type": "integer"
+          },
+          "filters": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            "title": "Filters",
+            "type": "object"
+          }
+        },
+        "required": [
+          "mode",
+          "dataset_version"
+        ],
+        "title": "ExportRequest",
+        "type": "object"
+      },
+      "ExtractedIssue": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "pattern": "^[A-Z][A-Z0-9_]*$",
+            "title": "Code",
+            "type": "string"
+          },
+          "field_paths": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Field Paths",
+            "type": "array"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "affected_actions": {
+            "items": {
+              "enum": [
+                "APPLY",
+                "COMPARE",
+                "EXPORT",
+                "REVIEW"
+              ],
+              "type": "string"
+            },
+            "title": "Affected Actions",
+            "type": "array"
+          },
+          "severity": {
+            "enum": [
+              "INFO",
+              "WARNING",
+              "ERROR"
+            ],
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "affected_actions",
+          "severity"
+        ],
+        "title": "ExtractedIssue",
+        "type": "object"
+      },
+      "ExtractedRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "record_key": {
+            "minLength": 1,
+            "title": "Record Key",
+            "type": "string"
+          },
+          "physical_row_key": {
+            "minLength": 1,
+            "title": "Physical Row Key",
+            "type": "string"
+          },
+          "origin_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Origin Raw"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/DestinationRef"
+          },
+          "carrier_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Carrier Raw"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Currency"
+          },
+          "service_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Service Raw"
+          },
+          "validity": {
+            "$ref": "#/components/schemas/Validity"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "routing": {
+            "$ref": "#/components/schemas/Routing"
+          },
+          "price_profiles": {
+            "items": {
+              "$ref": "#/components/schemas/PriceProfile"
+            },
+            "minItems": 1,
+            "title": "Price Profiles",
+            "type": "array"
+          },
+          "condition_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Condition Keys",
+            "type": "array"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "field_provenance": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Provenance"
+            },
+            "title": "Field Provenance",
+            "type": "object"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedIssue"
+            },
+            "title": "Issues",
+            "type": "array"
+          }
+        },
+        "required": [
+          "record_key",
+          "physical_row_key",
+          "destination",
+          "price_profiles",
+          "evidence_ids"
+        ],
+        "title": "ExtractedRecord",
+        "type": "object"
+      },
+      "ExtractionGroup": {
+        "additionalProperties": false,
+        "properties": {
+          "group_key": {
+            "minLength": 1,
+            "title": "Group Key",
+            "type": "string"
+          },
+          "label_raw": {
+            "minLength": 1,
+            "title": "Label Raw",
+            "type": "string"
+          },
+          "record_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Record Keys",
+            "type": "array"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "group_key",
+          "label_raw",
+          "record_keys",
+          "evidence_ids"
+        ],
+        "title": "ExtractionGroup",
+        "type": "object"
+      },
+      "ExtractionOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0",
+            "default": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "document_context": {
+            "$ref": "#/components/schemas/DocumentContext"
+          },
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedRecord"
+            },
+            "title": "Records",
+            "type": "array"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractionGroup"
+            },
+            "title": "Groups",
+            "type": "array"
+          },
+          "conditions": {
+            "items": {
+              "$ref": "#/components/schemas/Condition"
+            },
+            "title": "Conditions",
+            "type": "array"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedIssue"
+            },
+            "title": "Issues",
+            "type": "array"
+          }
+        },
+        "required": [
+          "document_context",
+          "records",
+          "conditions",
+          "evidence",
+          "issues"
+        ],
+        "title": "ExtractionOutput",
+        "type": "object"
+      },
+      "ImageLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "IMAGE_REGION",
+            "title": "Kind",
+            "type": "string"
+          },
+          "page_no": {
+            "default": 1,
+            "minimum": 1,
+            "title": "Page No",
+            "type": "integer"
+          },
+          "bbox": {
+            "description": "Normalized x0,y0,x1,y1 in original image orientation",
+            "maxItems": 4,
+            "minItems": 4,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Bbox",
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "bbox"
+        ],
+        "title": "ImageLocation",
+        "type": "object"
+      },
+      "Issue": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "pattern": "^[A-Z][A-Z0-9_]*$",
+            "title": "Code",
+            "type": "string"
+          },
+          "field_paths": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Field Paths",
+            "type": "array"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "affected_actions": {
+            "items": {
+              "enum": [
+                "APPLY",
+                "COMPARE",
+                "EXPORT",
+                "REVIEW"
+              ],
+              "type": "string"
+            },
+            "title": "Affected Actions",
+            "type": "array"
+          },
+          "severity": {
+            "enum": [
+              "INFO",
+              "WARNING",
+              "ERROR"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "resolution": {
+            "default": "OPEN",
+            "enum": [
+              "OPEN",
+              "ACKNOWLEDGED",
+              "RESOLVED"
+            ],
+            "title": "Resolution",
+            "type": "string"
+          },
+          "acknowledged_by": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged By"
+          },
+          "acknowledged_at": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(Z|[+-][0-9]{2}:[0-9]{2})$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged At"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "affected_actions",
+          "severity"
+        ],
+        "title": "Issue",
+        "type": "object"
+      },
+      "JobState": {
+        "enum": [
+          "QUEUED",
+          "RUNNING",
+          "SUCCEEDED",
+          "PARTIAL_FAILED",
+          "FAILED",
+          "CANCELLED",
+          "INTERRUPTED"
+        ],
+        "title": "JobState",
+        "type": "string"
+      },
+      "LiteralPrice": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "LITERAL_COMPONENT",
+            "title": "Kind",
+            "type": "string"
+          },
+          "raw_text": {
+            "minLength": 1,
+            "title": "Raw Text",
+            "type": "string"
+          },
+          "amount": {
+            "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+            "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+            "title": "Amount",
+            "type": "string"
+          },
+          "qualifier_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Qualifier Raw"
+          }
+        },
+        "required": [
+          "kind",
+          "raw_text",
+          "amount"
+        ],
+        "title": "LiteralPrice",
+        "type": "object"
+      },
+      "LocationCode": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "enum": [
+              "UNLOCODE",
+              "SOURCE_SPECIFIC",
+              "INTERNAL"
+            ],
+            "title": "Namespace",
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "title": "Value",
+            "type": "string"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Id"
+          }
+        },
+        "required": [
+          "namespace",
+          "value"
+        ],
+        "title": "LocationCode",
+        "type": "object"
+      },
+      "MatchState": {
+        "enum": [
+          "UNMATCHED",
+          "SUGGESTED",
+          "CONFIRMED",
+          "OUT_OF_SCOPE"
+        ],
+        "title": "MatchState",
+        "type": "string"
+      },
+      "MissingPrice": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "MISSING",
+            "title": "Kind",
+            "type": "string"
+          },
+          "raw_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Raw Text"
+          },
+          "amount": {
+            "default": null,
+            "title": "Amount",
+            "type": "null"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "title": "MissingPrice",
+        "type": "object"
+      },
+      "PatchRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_version": {
+            "minimum": 1,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "changes": {
+            "$ref": "#/components/schemas/CandidatePatch"
+          }
+        },
+        "required": [
+          "expected_version",
+          "changes"
+        ],
+        "title": "PatchRequest",
+        "type": "object"
+      },
+      "PlanState": {
+        "enum": [
+          "DRAFT",
+          "READY",
+          "APPLIED",
+          "STALE",
+          "CANCELLED"
+        ],
+        "title": "PlanState",
+        "type": "string"
+      },
+      "PriceProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "profile_key": {
+            "minLength": 1,
+            "title": "Profile Key",
+            "type": "string"
+          },
+          "label_raw": {
+            "minLength": 1,
+            "title": "Label Raw",
+            "type": "string"
+          },
+          "purpose": {
+            "default": "UNSPECIFIED",
+            "enum": [
+              "UNSPECIFIED",
+              "PROCUREMENT",
+              "SELLING",
+              "SETTLEMENT"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          },
+          "container_binding": {
+            "enum": [
+              "EXPLICIT",
+              "CONFIRMED",
+              "UNCONFIRMED"
+            ],
+            "title": "Container Binding",
+            "type": "string"
+          },
+          "cells": {
+            "additionalProperties": {
+              "discriminator": {
+                "mapping": {
+                  "LITERAL_COMPONENT": "#/components/schemas/LiteralPrice",
+                  "MISSING": "#/components/schemas/MissingPrice",
+                  "PAIR_UNASSIGNED": "#/components/schemas/UnassignedPair",
+                  "REFERENCE_PLUS_ADDON": "#/components/schemas/ReferencePrice"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LiteralPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ReferencePrice"
+                },
+                {
+                  "$ref": "#/components/schemas/UnassignedPair"
+                },
+                {
+                  "$ref": "#/components/schemas/MissingPrice"
+                }
+              ]
+            },
+            "title": "Cells",
+            "type": "object"
+          },
+          "container_map": {
+            "additionalProperties": {
+              "enum": [
+                "20GP",
+                "40GP",
+                "40HQ",
+                "40GP_AND_40HQ"
+              ],
+              "type": "string"
+            },
+            "title": "Container Map",
+            "type": "object"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "profile_key",
+          "label_raw",
+          "container_binding",
+          "cells",
+          "evidence_ids"
+        ],
+        "title": "PriceProfile",
+        "type": "object"
+      },
+      "Provenance": {
+        "additionalProperties": false,
+        "properties": {
+          "raw_value": {
+            "title": "Raw Value"
+          },
+          "normalized_value": {
+            "title": "Normalized Value"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/ProvenanceOrigin"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "rule_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Rule Id"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Confidence"
+          }
+        },
+        "required": [
+          "raw_value",
+          "normalized_value",
+          "origin"
+        ],
+        "title": "Provenance",
+        "type": "object"
+      },
+      "ProvenanceOrigin": {
+        "enum": [
+          "EXPLICIT",
+          "RULE_DERIVED",
+          "MANUAL",
+          "UNKNOWN"
+        ],
+        "title": "ProvenanceOrigin",
+        "type": "string"
+      },
+      "QuotationValues": {
+        "additionalProperties": false,
+        "properties": {
+          "origin_port_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Origin Port Id"
+          },
+          "destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Destination Id"
+          },
+          "carrier_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Carrier Id"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Id"
+          },
+          "source_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Code"
+          },
+          "service_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Service Name"
+          },
+          "price_profile_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price Profile Key"
+          },
+          "price_20gp": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 20Gp"
+          },
+          "price_40gp": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 40Gp"
+          },
+          "price_40hq": {
+            "anyOf": [
+              {
+                "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+                "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price 40Hq"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Currency"
+          },
+          "validity": {
+            "$ref": "#/components/schemas/Validity"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "routing": {
+            "$ref": "#/components/schemas/Routing"
+          },
+          "remarks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Remarks"
+          },
+          "price_scope_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Price Scope Summary"
+          },
+          "condition_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Condition Keys",
+            "type": "array"
+          }
+        },
+        "title": "QuotationValues",
+        "type": "object"
+      },
+      "ReferencePrice": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "REFERENCE_PLUS_ADDON",
+            "title": "Kind",
+            "type": "string"
+          },
+          "raw_text": {
+            "minLength": 1,
+            "title": "Raw Text",
+            "type": "string"
+          },
+          "reference_raw": {
+            "minLength": 1,
+            "title": "Reference Raw",
+            "type": "string"
+          },
+          "addon": {
+            "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+            "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+            "title": "Addon",
+            "type": "string"
+          },
+          "amount": {
+            "default": null,
+            "title": "Amount",
+            "type": "null"
+          }
+        },
+        "required": [
+          "kind",
+          "raw_text",
+          "reference_raw",
+          "addon"
+        ],
+        "title": "ReferencePrice",
+        "type": "object"
+      },
+      "ReviewRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_version": {
+            "minimum": 1,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "payload_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Payload Hash",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/ReviewState"
+          },
+          "acknowledged_issue_codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Acknowledged Issue Codes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "expected_version",
+          "payload_hash",
+          "decision"
+        ],
+        "title": "ReviewRequest",
+        "type": "object"
+      },
+      "ReviewState": {
+        "enum": [
+          "PENDING_REVIEW",
+          "APPROVED",
+          "NEEDS_INFO",
+          "REJECTED"
+        ],
+        "title": "ReviewState",
+        "type": "string"
+      },
+      "RouteNode": {
+        "additionalProperties": false,
+        "properties": {
+          "name_en": {
+            "minLength": 1,
+            "title": "Name En",
+            "type": "string"
+          },
+          "destination_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Destination Id"
+          }
+        },
+        "required": [
+          "name_en"
+        ],
+        "title": "RouteNode",
+        "type": "object"
+      },
+      "Routing": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "default": "UNKNOWN",
+            "enum": [
+              "UNKNOWN",
+              "DIRECT",
+              "TRANSSHIPMENT"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/RouteNode"
+            },
+            "title": "Nodes",
+            "type": "array"
+          },
+          "raw_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Raw Text"
+          }
+        },
+        "title": "Routing",
+        "type": "object"
+      },
+      "Schedule": {
+        "additionalProperties": false,
+        "properties": {
+          "raw_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Raw Text"
+          },
+          "weekdays": {
+            "items": {
+              "maximum": 7,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "title": "Weekdays",
+            "type": "array"
+          },
+          "service_binding": {
+            "default": "UNKNOWN",
+            "enum": [
+              "UNKNOWN",
+              "CONFIRMED"
+            ],
+            "title": "Service Binding",
+            "type": "string"
+          },
+          "transit_days_raw": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Transit Days Raw"
+          },
+          "transit_day_options": {
+            "items": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "title": "Transit Day Options",
+            "type": "array"
+          },
+          "transit_binding": {
+            "default": "UNKNOWN",
+            "enum": [
+              "UNKNOWN",
+              "SINGLE",
+              "ALTERNATIVES",
+              "CONFIRMED_RANGE"
+            ],
+            "title": "Transit Binding",
+            "type": "string"
+          }
+        },
+        "title": "Schedule",
+        "type": "object"
+      },
+      "TextLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "TEXT_SPAN",
+            "title": "Kind",
+            "type": "string"
+          },
+          "start": {
+            "minimum": 0,
+            "title": "Start",
+            "type": "integer"
+          },
+          "end": {
+            "minimum": 1,
+            "title": "End",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "kind",
+          "start",
+          "end"
+        ],
+        "title": "TextLocation",
+        "type": "object"
+      },
+      "UnassignedPair": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "PAIR_UNASSIGNED",
+            "title": "Kind",
+            "type": "string"
+          },
+          "raw_text": {
+            "minLength": 1,
+            "title": "Raw Text",
+            "type": "string"
+          },
+          "tokens": {
+            "items": {
+              "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+              "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Tokens",
+            "type": "array"
+          },
+          "amount": {
+            "default": null,
+            "title": "Amount",
+            "type": "null"
+          }
+        },
+        "required": [
+          "kind",
+          "raw_text",
+          "tokens"
+        ],
+        "title": "UnassignedPair",
+        "type": "object"
+      },
+      "Validity": {
+        "additionalProperties": false,
+        "properties": {
+          "valid_from": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Valid From"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Valid To"
+          },
+          "basis": {
+            "$ref": "#/components/schemas/DateBasis",
+            "default": "UNSPECIFIED"
+          },
+          "raw_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Raw Text"
+          },
+          "year_evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Year Evidence Ids",
+            "type": "array"
+          }
+        },
+        "title": "Validity",
+        "type": "object"
+      }
+    }
+  }
+}

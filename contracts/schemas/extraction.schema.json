@@ -1,0 +1,1273 @@
+{
+  "$defs": {
+    "CellLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "XLSX_CELL",
+          "title": "Kind",
+          "type": "string"
+        },
+        "sheet_name": {
+          "minLength": 1,
+          "title": "Sheet Name",
+          "type": "string"
+        },
+        "cell_range": {
+          "pattern": "^[A-Z]+[1-9][0-9]*(:[A-Z]+[1-9][0-9]*)?$",
+          "title": "Cell Range",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "sheet_name",
+        "cell_range"
+      ],
+      "title": "CellLocation",
+      "type": "object"
+    },
+    "Condition": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "raw_text": {
+          "minLength": 1,
+          "title": "Raw Text",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "DOCUMENT",
+            "GROUP",
+            "RECORD",
+            "PROFILE",
+            "CONTAINER"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "target_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Keys",
+          "type": "array"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Z]{3}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+              "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "unit_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit Raw"
+        },
+        "payment_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Payment Raw"
+        },
+        "exception_target_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exception Target Keys",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "raw_text",
+        "scope",
+        "target_keys",
+        "evidence_ids"
+      ],
+      "title": "Condition",
+      "type": "object"
+    },
+    "DateBasis": {
+      "enum": [
+        "UNSPECIFIED",
+        "ETD",
+        "BOOKING_DATE",
+        "GATE_IN_DATE",
+        "QUOTATION_DATE",
+        "OTHER"
+      ],
+      "title": "DateBasis",
+      "type": "string"
+    },
+    "DestinationKind": {
+      "enum": [
+        "SEAPORT",
+        "TERMINAL",
+        "ICD",
+        "INLAND_POINT",
+        "CITY_SCOPE",
+        "UNKNOWN"
+      ],
+      "title": "DestinationKind",
+      "type": "string"
+    },
+    "DestinationRef": {
+      "additionalProperties": false,
+      "properties": {
+        "raw_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Name"
+        },
+        "country_en": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Country En"
+        },
+        "country_zh": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Country Zh"
+        },
+        "name_en": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name En"
+        },
+        "name_zh": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name Zh"
+        },
+        "kind": {
+          "$ref": "#/$defs/DestinationKind",
+          "default": "UNKNOWN"
+        },
+        "terminal_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Terminal Name"
+        },
+        "destination_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination Id"
+        },
+        "parent_destination_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Destination Id"
+        },
+        "route_group_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Route Group Id"
+        },
+        "codes": {
+          "items": {
+            "$ref": "#/$defs/LocationCode"
+          },
+          "title": "Codes",
+          "type": "array"
+        }
+      },
+      "title": "DestinationRef",
+      "type": "object"
+    },
+    "DocumentContext": {
+      "additionalProperties": false,
+      "properties": {
+        "title_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title Raw"
+        },
+        "source_updated_on": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Updated On"
+        },
+        "origin_scope_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin Scope Raw"
+        },
+        "validity": {
+          "$ref": "#/$defs/Validity"
+        }
+      },
+      "title": "DocumentContext",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "file_id": {
+          "format": "uuid",
+          "title": "File Id",
+          "type": "string"
+        },
+        "field_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field Path"
+        },
+        "original_text": {
+          "title": "Original Text",
+          "type": "string"
+        },
+        "location": {
+          "discriminator": {
+            "mapping": {
+              "IMAGE_REGION": "#/$defs/ImageLocation",
+              "TEXT_SPAN": "#/$defs/TextLocation",
+              "XLSX_CELL": "#/$defs/CellLocation"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CellLocation"
+            },
+            {
+              "$ref": "#/$defs/ImageLocation"
+            },
+            {
+              "$ref": "#/$defs/TextLocation"
+            }
+          ],
+          "title": "Location"
+        }
+      },
+      "required": [
+        "id",
+        "file_id",
+        "original_text",
+        "location"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "ExtractedIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "title": "Code",
+          "type": "string"
+        },
+        "field_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Field Paths",
+          "type": "array"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "affected_actions": {
+          "items": {
+            "enum": [
+              "APPLY",
+              "COMPARE",
+              "EXPORT",
+              "REVIEW"
+            ],
+            "type": "string"
+          },
+          "title": "Affected Actions",
+          "type": "array"
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ],
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "affected_actions",
+        "severity"
+      ],
+      "title": "ExtractedIssue",
+      "type": "object"
+    },
+    "ExtractedRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "record_key": {
+          "minLength": 1,
+          "title": "Record Key",
+          "type": "string"
+        },
+        "physical_row_key": {
+          "minLength": 1,
+          "title": "Physical Row Key",
+          "type": "string"
+        },
+        "origin_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin Raw"
+        },
+        "destination": {
+          "$ref": "#/$defs/DestinationRef"
+        },
+        "carrier_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Carrier Raw"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Z]{3}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "service_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Service Raw"
+        },
+        "validity": {
+          "$ref": "#/$defs/Validity"
+        },
+        "schedule": {
+          "$ref": "#/$defs/Schedule"
+        },
+        "routing": {
+          "$ref": "#/$defs/Routing"
+        },
+        "price_profiles": {
+          "items": {
+            "$ref": "#/$defs/PriceProfile"
+          },
+          "minItems": 1,
+          "title": "Price Profiles",
+          "type": "array"
+        },
+        "condition_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Condition Keys",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "field_provenance": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Provenance"
+          },
+          "title": "Field Provenance",
+          "type": "object"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/ExtractedIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "record_key",
+        "physical_row_key",
+        "destination",
+        "price_profiles",
+        "evidence_ids"
+      ],
+      "title": "ExtractedRecord",
+      "type": "object"
+    },
+    "ExtractionGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "group_key": {
+          "minLength": 1,
+          "title": "Group Key",
+          "type": "string"
+        },
+        "label_raw": {
+          "minLength": 1,
+          "title": "Label Raw",
+          "type": "string"
+        },
+        "record_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Record Keys",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "group_key",
+        "label_raw",
+        "record_keys",
+        "evidence_ids"
+      ],
+      "title": "ExtractionGroup",
+      "type": "object"
+    },
+    "ImageLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "IMAGE_REGION",
+          "title": "Kind",
+          "type": "string"
+        },
+        "page_no": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Page No",
+          "type": "integer"
+        },
+        "bbox": {
+          "description": "Normalized x0,y0,x1,y1 in original image orientation",
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "bbox"
+      ],
+      "title": "ImageLocation",
+      "type": "object"
+    },
+    "LiteralPrice": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "LITERAL_COMPONENT",
+          "title": "Kind",
+          "type": "string"
+        },
+        "raw_text": {
+          "minLength": 1,
+          "title": "Raw Text",
+          "type": "string"
+        },
+        "amount": {
+          "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+          "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "qualifier_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Qualifier Raw"
+        }
+      },
+      "required": [
+        "kind",
+        "raw_text",
+        "amount"
+      ],
+      "title": "LiteralPrice",
+      "type": "object"
+    },
+    "LocationCode": {
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "enum": [
+            "UNLOCODE",
+            "SOURCE_SPECIFIC",
+            "INTERNAL"
+          ],
+          "title": "Namespace",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        }
+      },
+      "required": [
+        "namespace",
+        "value"
+      ],
+      "title": "LocationCode",
+      "type": "object"
+    },
+    "MissingPrice": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "MISSING",
+          "title": "Kind",
+          "type": "string"
+        },
+        "raw_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Text"
+        },
+        "amount": {
+          "default": null,
+          "title": "Amount",
+          "type": "null"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "MissingPrice",
+      "type": "object"
+    },
+    "PriceProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_key": {
+          "minLength": 1,
+          "title": "Profile Key",
+          "type": "string"
+        },
+        "label_raw": {
+          "minLength": 1,
+          "title": "Label Raw",
+          "type": "string"
+        },
+        "purpose": {
+          "default": "UNSPECIFIED",
+          "enum": [
+            "UNSPECIFIED",
+            "PROCUREMENT",
+            "SELLING",
+            "SETTLEMENT"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "container_binding": {
+          "enum": [
+            "EXPLICIT",
+            "CONFIRMED",
+            "UNCONFIRMED"
+          ],
+          "title": "Container Binding",
+          "type": "string"
+        },
+        "cells": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "LITERAL_COMPONENT": "#/$defs/LiteralPrice",
+                "MISSING": "#/$defs/MissingPrice",
+                "PAIR_UNASSIGNED": "#/$defs/UnassignedPair",
+                "REFERENCE_PLUS_ADDON": "#/$defs/ReferencePrice"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/LiteralPrice"
+              },
+              {
+                "$ref": "#/$defs/ReferencePrice"
+              },
+              {
+                "$ref": "#/$defs/UnassignedPair"
+              },
+              {
+                "$ref": "#/$defs/MissingPrice"
+              }
+            ]
+          },
+          "title": "Cells",
+          "type": "object"
+        },
+        "container_map": {
+          "additionalProperties": {
+            "enum": [
+              "20GP",
+              "40GP",
+              "40HQ",
+              "40GP_AND_40HQ"
+            ],
+            "type": "string"
+          },
+          "title": "Container Map",
+          "type": "object"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile_key",
+        "label_raw",
+        "container_binding",
+        "cells",
+        "evidence_ids"
+      ],
+      "title": "PriceProfile",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "raw_value": {
+          "title": "Raw Value"
+        },
+        "normalized_value": {
+          "title": "Normalized Value"
+        },
+        "origin": {
+          "$ref": "#/$defs/ProvenanceOrigin"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Id"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "raw_value",
+        "normalized_value",
+        "origin"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "ProvenanceOrigin": {
+      "enum": [
+        "EXPLICIT",
+        "RULE_DERIVED",
+        "MANUAL",
+        "UNKNOWN"
+      ],
+      "title": "ProvenanceOrigin",
+      "type": "string"
+    },
+    "ReferencePrice": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "REFERENCE_PLUS_ADDON",
+          "title": "Kind",
+          "type": "string"
+        },
+        "raw_text": {
+          "minLength": 1,
+          "title": "Raw Text",
+          "type": "string"
+        },
+        "reference_raw": {
+          "minLength": 1,
+          "title": "Reference Raw",
+          "type": "string"
+        },
+        "addon": {
+          "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+          "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+          "title": "Addon",
+          "type": "string"
+        },
+        "amount": {
+          "default": null,
+          "title": "Amount",
+          "type": "null"
+        }
+      },
+      "required": [
+        "kind",
+        "raw_text",
+        "reference_raw",
+        "addon"
+      ],
+      "title": "ReferencePrice",
+      "type": "object"
+    },
+    "RouteNode": {
+      "additionalProperties": false,
+      "properties": {
+        "name_en": {
+          "minLength": 1,
+          "title": "Name En",
+          "type": "string"
+        },
+        "destination_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination Id"
+        }
+      },
+      "required": [
+        "name_en"
+      ],
+      "title": "RouteNode",
+      "type": "object"
+    },
+    "Routing": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "DIRECT",
+            "TRANSSHIPMENT"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/RouteNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        },
+        "raw_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Text"
+        }
+      },
+      "title": "Routing",
+      "type": "object"
+    },
+    "Schedule": {
+      "additionalProperties": false,
+      "properties": {
+        "raw_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Text"
+        },
+        "weekdays": {
+          "items": {
+            "maximum": 7,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Weekdays",
+          "type": "array"
+        },
+        "service_binding": {
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "CONFIRMED"
+          ],
+          "title": "Service Binding",
+          "type": "string"
+        },
+        "transit_days_raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transit Days Raw"
+        },
+        "transit_day_options": {
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Transit Day Options",
+          "type": "array"
+        },
+        "transit_binding": {
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "SINGLE",
+            "ALTERNATIVES",
+            "CONFIRMED_RANGE"
+          ],
+          "title": "Transit Binding",
+          "type": "string"
+        }
+      },
+      "title": "Schedule",
+      "type": "object"
+    },
+    "TextLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "TEXT_SPAN",
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "start",
+        "end"
+      ],
+      "title": "TextLocation",
+      "type": "object"
+    },
+    "UnassignedPair": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "PAIR_UNASSIGNED",
+          "title": "Kind",
+          "type": "string"
+        },
+        "raw_text": {
+          "minLength": 1,
+          "title": "Raw Text",
+          "type": "string"
+        },
+        "tokens": {
+          "items": {
+            "description": "Nonnegative decimal string, max 14 integer / 4 fraction digits; null means unknown",
+            "pattern": "^(0|[1-9][0-9]{0,13})(\\.[0-9]{1,4})?$",
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Tokens",
+          "type": "array"
+        },
+        "amount": {
+          "default": null,
+          "title": "Amount",
+          "type": "null"
+        }
+      },
+      "required": [
+        "kind",
+        "raw_text",
+        "tokens"
+      ],
+      "title": "UnassignedPair",
+      "type": "object"
+    },
+    "Validity": {
+      "additionalProperties": false,
+      "properties": {
+        "valid_from": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid From"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid To"
+        },
+        "basis": {
+          "$ref": "#/$defs/DateBasis",
+          "default": "UNSPECIFIED"
+        },
+        "raw_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Text"
+        },
+        "year_evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Year Evidence Ids",
+          "type": "array"
+        }
+      },
+      "title": "Validity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "document_context": {
+      "$ref": "#/$defs/DocumentContext"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/ExtractedRecord"
+      },
+      "title": "Records",
+      "type": "array"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/$defs/ExtractionGroup"
+      },
+      "title": "Groups",
+      "type": "array"
+    },
+    "conditions": {
+      "items": {
+        "$ref": "#/$defs/Condition"
+      },
+      "title": "Conditions",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/ExtractedIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "document_context",
+    "records",
+    "conditions",
+    "evidence",
+    "issues"
+  ],
+  "title": "ExtractionOutput",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

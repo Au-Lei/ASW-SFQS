@@ -1,0 +1,26 @@
+{
+  "contract_version": "1.0.0",
+  "origin_name": "青岛港",
+  "sheet_names": ["美洲航线", "欧洲航线", "美加航线", "亚洲航线", "非洲航线", "中东印巴航线"],
+  "date_display": "mm-dd",
+  "columns": [
+    {"letter":"A","label":"航线","field":"route_group_name","type":"string"},
+    {"letter":"B","label":"国家英文名","field":"country_en","type":"string"},
+    {"letter":"C","label":"国家中文名","field":"country_zh","type":"string"},
+    {"letter":"D","label":"英文港口名","field":"destination_name_en","type":"string"},
+    {"letter":"E","label":"中文港口名","field":"destination_name_zh","type":"string"},
+    {"letter":"F","label":"船公司","field":"carrier_code","type":"string"},
+    {"letter":"G","label":"20GP","field":"price_20gp","type":"money"},
+    {"letter":"H","label":"40GP","field":"price_40gp","type":"money"},
+    {"letter":"I","label":"40HQ","field":"price_40hq","type":"money"},
+    {"letter":"J","label":"货币","field":"currency","type":"string"},
+    {"letter":"K","label":"船期","field":"schedule_summary","type":"string"},
+    {"letter":"L","label":"航程天数","field":"transit_days_summary","type":"string"},
+    {"letter":"M","label":"途径路径","field":"routing_summary","type":"string"},
+    {"letter":"N","label":"价格来源","field":"source_code","type":"string"},
+    {"letter":"O","label":"备注（注意事项）","field":"remarks","type":"string"},
+    {"letter":"P","label":"有效期起","field":"valid_from","type":"date"},
+    {"letter":"Q","label":"有效期止","field":"valid_to","type":"date"},
+    {"letter":"R","label":"费用口径","field":"price_scope_summary","type":"string"}
+  ]
+}

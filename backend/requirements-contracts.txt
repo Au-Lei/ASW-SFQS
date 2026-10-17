@@ -1,0 +1,2 @@
+# T02 contract generation and validation only; application dependencies belong to T04.
+pydantic==2.14.0

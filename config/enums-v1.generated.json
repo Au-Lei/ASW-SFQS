@@ -1,0 +1,70 @@
+{
+  "ApplicationState": [
+    "NOT_APPLIED",
+    "APPLIED",
+    "NO_CHANGE",
+    "EXCLUDED"
+  ],
+  "ChangeAction": [
+    "CREATE_QUOTE",
+    "UPDATE_QUOTE",
+    "LINK_EVIDENCE",
+    "ARCHIVE_QUOTE",
+    "NO_CHANGE",
+    "EXCLUDE"
+  ],
+  "DateBasis": [
+    "UNSPECIFIED",
+    "ETD",
+    "BOOKING_DATE",
+    "GATE_IN_DATE",
+    "QUOTATION_DATE",
+    "OTHER"
+  ],
+  "DestinationKind": [
+    "SEAPORT",
+    "TERMINAL",
+    "ICD",
+    "INLAND_POINT",
+    "CITY_SCOPE",
+    "UNKNOWN"
+  ],
+  "ExportMode": [
+    "FULL",
+    "FILTERED"
+  ],
+  "JobState": [
+    "QUEUED",
+    "RUNNING",
+    "SUCCEEDED",
+    "PARTIAL_FAILED",
+    "FAILED",
+    "CANCELLED",
+    "INTERRUPTED"
+  ],
+  "MatchState": [
+    "UNMATCHED",
+    "SUGGESTED",
+    "CONFIRMED",
+    "OUT_OF_SCOPE"
+  ],
+  "PlanState": [
+    "DRAFT",
+    "READY",
+    "APPLIED",
+    "STALE",
+    "CANCELLED"
+  ],
+  "ProvenanceOrigin": [
+    "EXPLICIT",
+    "RULE_DERIVED",
+    "MANUAL",
+    "UNKNOWN"
+  ],
+  "ReviewState": [
+    "PENDING_REVIEW",
+    "APPROVED",
+    "NEEDS_INFO",
+    "REJECTED"
+  ]
+}

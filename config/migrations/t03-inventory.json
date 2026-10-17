@@ -1,0 +1,58 @@
+{
+  "sheets": [
+    {
+      "name": "美洲航线",
+      "baseline_destinations": 69,
+      "latest_rows": 69,
+      "priced_rows": 0
+    },
+    {
+      "name": "欧洲航线",
+      "baseline_destinations": 61,
+      "latest_rows": 71,
+      "priced_rows": 39
+    },
+    {
+      "name": "美加航线",
+      "baseline_destinations": 27,
+      "latest_rows": 27,
+      "priced_rows": 0
+    },
+    {
+      "name": "亚洲航线",
+      "baseline_destinations": 68,
+      "latest_rows": 79,
+      "priced_rows": 45
+    },
+    {
+      "name": "非洲航线",
+      "baseline_destinations": 49,
+      "latest_rows": 49,
+      "priced_rows": 0
+    },
+    {
+      "name": "中东印巴航线",
+      "baseline_destinations": 21,
+      "latest_rows": 21,
+      "priced_rows": 0
+    }
+  ],
+  "summary": {
+    "baseline_destination_rows": 295,
+    "latest_destination_rows": 316,
+    "latest_distinct_keys": 315,
+    "common_keys": 294,
+    "added_keys": 21,
+    "absent_baseline_keys": 1,
+    "extra_quote_rows_same_destination": 1,
+    "baseline_route_groups": 34,
+    "added_route_groups": 3
+  },
+  "migration_quote_candidates": 84,
+  "blank_placeholder_rows": 232,
+  "kind_counts": {
+    "UNKNOWN": 289,
+    "INLAND_POINT": 5,
+    "ICD": 1
+  }
+}
