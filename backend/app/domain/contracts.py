@@ -596,6 +596,29 @@ class ExportAccepted(Contract):
     job_id: UUID
 
 
+class JobCommandRequest(Contract):
+    expected_version: Version
+
+
+class JobView(Contract):
+    id: UUID
+    kind: NonEmpty
+    state: JobState
+    stage: str | None = None
+    version: Version
+    progress_done: Annotated[int, Field(strict=True, ge=0)]
+    progress_total: Annotated[int, Field(strict=True, ge=0)] | None = None
+    attempts: Annotated[int, Field(strict=True, ge=0)]
+    max_attempts: Annotated[int, Field(strict=True, ge=1)]
+    cancel_requested: bool
+    available_at: Timestamp | None = None
+    created_at: Timestamp
+    updated_at: Timestamp
+    error_code: str | None = None
+    result_available: bool
+    retry_job_id: UUID | None = None
+
+
 class ErrorDetail(Contract):
     field_path: str | None = None
     code: NonEmpty
@@ -605,7 +628,7 @@ class ErrorDetail(Contract):
 class APIError(Contract):
     code: Literal["BAD_REQUEST", "NOT_FOUND", "VERSION_CONFLICT", "PLAN_STALE", "IDEMPOTENCY_KEY_REUSED",
                   "ACTION_BLOCKED", "VALIDATION_ERROR", "PAYLOAD_TOO_LARGE", "INTERNAL_ERROR",
-                  "FORBIDDEN", "METHOD_NOT_ALLOWED"]
+                  "FORBIDDEN", "METHOD_NOT_ALLOWED", "SERVICE_UNAVAILABLE"]
     message: NonEmpty
     details: list[ErrorDetail] = Field(default_factory=list)
     request_id: NonEmpty
@@ -618,7 +641,7 @@ class ErrorResponse(Contract):
 class HealthResponse(Contract):
     status: Literal["ok"]
     version: str
-    stage: Literal["T05"]
+    stage: Literal["T07"]
     database_status: Literal["NOT_INITIALIZED", "READY", "OUTDATED", "UNAVAILABLE"]
     model_status: Literal["NOT_CONFIGURED", "ADAPTER_NOT_IMPLEMENTED"]
 
@@ -740,6 +763,8 @@ class ContractBundle(Contract):
     export_accepted: ExportAccepted
     error: ErrorResponse
     job_state: JobState
+    job: JobView
+    job_command: JobCommandRequest
     change_action: ChangeAction
     container_type: ContainerType
     destination: DestinationRef

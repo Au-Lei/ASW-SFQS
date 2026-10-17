@@ -15,7 +15,8 @@
             "PAYLOAD_TOO_LARGE",
             "INTERNAL_ERROR",
             "FORBIDDEN",
-            "METHOD_NOT_ALLOWED"
+            "METHOD_NOT_ALLOWED",
+            "SERVICE_UNAVAILABLE"
           ],
           "title": "Code",
           "type": "string"
@@ -1467,7 +1468,7 @@
           "type": "string"
         },
         "stage": {
-          "const": "T05",
+          "const": "T07",
           "title": "Stage",
           "type": "string"
         },
@@ -1636,6 +1637,21 @@
       "title": "IssueAction",
       "type": "string"
     },
+    "JobCommandRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_version": {
+          "minimum": 1,
+          "title": "Expected Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "expected_version"
+      ],
+      "title": "JobCommandRequest",
+      "type": "object"
+    },
     "JobState": {
       "enum": [
         "QUEUED",
@@ -1648,6 +1664,140 @@
       ],
       "title": "JobState",
       "type": "string"
+    },
+    "JobView": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "minLength": 1,
+          "title": "Kind",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/JobState"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "progress_done": {
+          "minimum": 0,
+          "title": "Progress Done",
+          "type": "integer"
+        },
+        "progress_total": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Progress Total"
+        },
+        "attempts": {
+          "minimum": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "max_attempts": {
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "cancel_requested": {
+          "title": "Cancel Requested",
+          "type": "boolean"
+        },
+        "available_at": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(Z|[+-][0-9]{2}:[0-9]{2})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available At"
+        },
+        "created_at": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(Z|[+-][0-9]{2}:[0-9]{2})$",
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(Z|[+-][0-9]{2}:[0-9]{2})$",
+          "title": "Updated At",
+          "type": "string"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "result_available": {
+          "title": "Result Available",
+          "type": "boolean"
+        },
+        "retry_job_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retry Job Id"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "state",
+        "version",
+        "progress_done",
+        "attempts",
+        "max_attempts",
+        "cancel_requested",
+        "created_at",
+        "updated_at",
+        "result_available"
+      ],
+      "title": "JobView",
+      "type": "object"
     },
     "LiteralPrice": {
       "additionalProperties": false,
@@ -2607,6 +2757,12 @@
     "job_state": {
       "$ref": "#/$defs/JobState"
     },
+    "job": {
+      "$ref": "#/$defs/JobView"
+    },
+    "job_command": {
+      "$ref": "#/$defs/JobCommandRequest"
+    },
     "change_action": {
       "$ref": "#/$defs/ChangeAction"
     },
@@ -2641,6 +2797,8 @@
     "export_accepted",
     "error",
     "job_state",
+    "job",
+    "job_command",
     "change_action",
     "container_type",
     "destination",

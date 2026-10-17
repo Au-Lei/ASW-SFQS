@@ -7,7 +7,7 @@ from uuid import uuid4
 
 from sqlalchemy import (
     Boolean, CheckConstraint, Column, Date, ForeignKey, ForeignKeyConstraint,
-    Index, Integer, JSON, MetaData, String, Text, UniqueConstraint,
+    Index, Integer, JSON, MetaData, String, Text, UniqueConstraint, text,
 )
 from sqlalchemy.orm import DeclarativeBase, declared_attr
 
@@ -492,8 +492,53 @@ class Job(Versioned, Base):
     error = json_value(nullable=True)
     created_at = Column(UTCDateTime, nullable=False, default=utc_now)
     updated_at = Column(UTCDateTime, nullable=False, default=utc_now)
+    progress_done = Column(Integer, nullable=False, default=0, server_default=text("0"))
+    progress_total = Column(Integer)
+    available_at = Column(UTCDateTime)
+    dedup_key = Column(String(64))
+    request_hash = Column(String(64))
+    retry_parent_id = Column(String(36), ForeignKey("job.id"))
+    execution_id = Column(String(36), ForeignKey("job.id"))
     __table_args__ = (CheckConstraint("attempts >= 0 AND max_attempts >= 1", name="attempt_limits"),
-                      Index("ix_job_claim", "state", "lease_expires_at", "created_at"))
+                      CheckConstraint("progress_done >= 0", name="progress_nonnegative"),
+                      CheckConstraint("progress_total IS NULL OR progress_total >= progress_done", name="progress_order"),
+                      Index("ix_job_claim", "state", "lease_expires_at", "created_at"),
+                      Index("ix_job_due", "state", "available_at", "created_at"),
+                      Index("uq_job_dedup_key", "dedup_key", unique=True),
+                      Index("uq_job_retry_parent_id", "retry_parent_id", unique=True))
+
+
+class JobAttempt(Base):
+    __tablename__ = "job_attempt"
+    id = key()
+    job_id = ref("job", index=True)
+    attempt_no = Column(Integer, nullable=False)
+    worker_id = Column(String(36), nullable=False)
+    state = state(("RUNNING", "SUCCEEDED", "PARTIAL_FAILED", "FAILED", "CANCELLED", "INTERRUPTED"), "RUNNING", "state")
+    started_at = Column(UTCDateTime, nullable=False, default=utc_now)
+    finished_at = Column(UTCDateTime)
+    error = json_value(nullable=True)
+    __table_args__ = (UniqueConstraint("job_id", "attempt_no", name="uq_attempt_number"),)
+
+
+class JobCheckpoint(Base):
+    __tablename__ = "job_checkpoint"
+    id = key()
+    execution_id = ref("job", index=True)
+    attempt_id = ref("job_attempt")
+    item_key = Column(String(100), nullable=False)
+    result_ref = json_value()
+    payload_sha256 = Column(String(64), nullable=False)
+    created_at = Column(UTCDateTime, nullable=False, default=utc_now)
+    __table_args__ = (UniqueConstraint("execution_id", "item_key", name="uq_checkpoint_item"),)
+
+
+class WorkerRuntime(Base):
+    __tablename__ = "worker_runtime"
+    name = Column(String(50), primary_key=True)
+    owner = Column(String(36), nullable=False)
+    lease_expires_at = Column(UTCDateTime, nullable=False)
+    heartbeat_at = Column(UTCDateTime, nullable=False)
 
 
 # SQLAlchemy optimistic locking covers ORM writes; bulk SQL must explicitly CAS.

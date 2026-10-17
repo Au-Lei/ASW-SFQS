@@ -37,7 +37,7 @@ session_cookie_schema=APIKeyCookie(name=COOKIE_NAME,scheme_name="LocalSessionCoo
 
 @router.get("/health",response_model=HealthResponse)
 def health(request: Request):
-    return HealthResponse(status="ok",version="0.1.0",stage="T05",database_status=schema_status(request.app.state.settings.database_url),
+    return HealthResponse(status="ok",version="0.1.0",stage="T07",database_status=schema_status(request.app.state.settings.database_url),
                           model_status=request.app.state.settings.model_status)
 
 

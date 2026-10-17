@@ -94,7 +94,7 @@ class DatabaseTests(unittest.TestCase):
 
     def test_fresh_schema_is_empty_and_complete(self):
         self.assertEqual(schema_status(self.url), "READY")
-        self.assertEqual(len(Base.metadata.tables), 31)
+        self.assertEqual(len(Base.metadata.tables), 34)
         self.assertEqual(set(inspect(self.engine).get_table_names()), set(Base.metadata.tables) | {"alembic_version"})
         self.assertEqual(self.count(Quotation), 0)
         self.assertEqual(self.count(Destination), 0)
@@ -131,7 +131,7 @@ class DatabaseTests(unittest.TestCase):
         engine = make_engine(old)
         with engine.connect() as connection:
             self.assertEqual(connection.exec_driver_sql("SELECT count(*) FROM origin_port").scalar(), 1)
-            self.assertEqual(connection.exec_driver_sql("SELECT count(*) FROM sqlite_master WHERE type='trigger'").scalar(), 21)
+            self.assertEqual(connection.exec_driver_sql("SELECT count(*) FROM sqlite_master WHERE type='trigger'").scalar(), 26)
         engine.dispose()
 
     def test_backward_upgrade_refused(self):
@@ -418,7 +418,7 @@ class DatabaseTests(unittest.TestCase):
         with TestClient(create_app(Settings(_env_file=None, database_url=self.url)), base_url="http://127.0.0.1:8000") as client:
             health = client.get("/api/v1/health").json()
             self.assertEqual(health["database_status"], "READY")
-            self.assertEqual(health["stage"], "T05")
+            self.assertEqual(health["stage"], "T07")
             self.assertEqual(client.get("/api/v1/bootstrap").json()["quotation_status"], "NOT_INITIALIZED")
 
     def test_path_is_cwd_independent_and_rejects_uris_network(self):

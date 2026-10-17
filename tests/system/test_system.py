@@ -130,7 +130,8 @@ class SystemAPITests(unittest.TestCase):
     def test_runtime_openapi_only_lists_implemented_routes(self):
         with client_for() as client:
             document=client.get("/api/v1/openapi.json").json()
-            expected={"/api/v1/health","/api/v1/bootstrap","/api/v1/session/verify"}
+            expected={"/api/v1/health","/api/v1/bootstrap","/api/v1/session/verify",
+                      "/api/v1/jobs/{id}","/api/v1/jobs/{id}/cancel","/api/v1/jobs/{id}/retry"}
             self.assertEqual(set(document["paths"]),expected)
             contract=json.loads((ROOT/"contracts/openapi.json").read_text(encoding="utf-8"))
             declared={"/api/v1"+path for path,methods in contract["paths"].items() if any(o.get("x-implemented") for o in methods.values())}

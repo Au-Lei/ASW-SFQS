@@ -75,6 +75,6 @@ def schema_status(database_url: str) -> str:
     try:
         with closing(sqlite3.connect(path.as_uri() + "?mode=ro", uri=True, timeout=1)) as connection:
             rows = connection.execute("SELECT version_num FROM alembic_version").fetchall()
-            return "READY" if rows == [("0002_history_guards",)] else "OUTDATED"
+            return "READY" if rows == [("0003_jobs",)] else "OUTDATED"
     except sqlite3.DatabaseError:
         return "UNAVAILABLE"

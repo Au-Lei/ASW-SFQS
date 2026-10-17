@@ -53,7 +53,7 @@ def build():
         params.extend({"name":h,"in":"header","required":True,"schema":{"type":"string","minLength":1}} for h in headers)
         response_headers = {"X-Request-ID":{"description":"请求追踪ID", "schema":{"type":"string"}}}
         responses = {status: {"description":"成功" if implemented else "成功；计划接口，尚未实现", "content":content(response), "headers":response_headers}}
-        for code in ("400", "403", "404", "405", "409", "422", "413", "500"):
+        for code in ("400", "403", "404", "405", "409", "422", "413", "500", "503"):
             responses[code] = {"description":"统一错误结构", "content":content("ErrorResponse"), "headers":response_headers}
         op = {"operationId":method + "_" + path.strip("/").replace("/", "_").replace("{id}", "by_id"),
               "parameters":params,"responses":responses,"x-implemented":implemented}
@@ -70,6 +70,12 @@ def build():
     operation("/health", "get", None, "HealthResponse", implemented=True)
     operation("/bootstrap", "get", None, "BootstrapResponse", implemented=True)
     operation("/session/verify", "post", None, "SessionResponse", headers=("Origin","X-CSRF-Token"), implemented=True)
+    operation("/jobs/{id}", "get", None, "JobView", implemented=True)
+    operation("/jobs/{id}/cancel", "post", "JobCommandRequest", "JobView", headers=("Origin","X-CSRF-Token"), implemented=True)
+    operation("/jobs/{id}/retry", "post", "JobCommandRequest", "JobView", headers=("Origin","X-CSRF-Token"), implemented=True)
+    for path in ("/jobs/{id}", "/jobs/{id}/cancel", "/jobs/{id}/retry"):
+        for op in paths[path].values():
+            op["security"] = [{"LocalSessionCookie":[]}]
     paths["/session/verify"]["post"]["security"] = [{"LocalSessionCookie":[]}]
     api = {"openapi":"3.1.0","info":{"title":"青岛海运报价 V1 数据合同", "version":"1.0.0",
             "description":"T02业务合同及T04系统接口。x-implemented区分运行接口与计划接口，运行端OpenAPI仅列出已实现路由。"},

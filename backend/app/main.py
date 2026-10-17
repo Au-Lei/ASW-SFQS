@@ -7,6 +7,7 @@ from starlette.exceptions import HTTPException
 from starlette.responses import FileResponse
 
 from backend.app.api.system import load_seed_summary, router
+from backend.app.api.jobs import router as jobs_router
 from backend.app.core.boundary import LocalBoundary, LocalSession, error_response
 from backend.app.core.settings import ROOT, Settings
 from backend.app.domain.contracts import ErrorResponse
@@ -25,7 +26,7 @@ def create_app(settings: Settings | None = None, *, frontend_dist=None):
 
     app=FastAPI(title="ASW-SFQS",version="0.1.0",debug=False,lifespan=lifespan,
         docs_url=None,redoc_url=None,openapi_url="/api/v1/openapi.json",
-        responses={s:{"model":ErrorResponse} for s in (400,403,404,405,422,500)})
+        responses={s:{"model":ErrorResponse} for s in (400,403,404,405,409,422,500,503)})
     app.state.settings=settings
     app.state.sessions=LocalSession()
     app.add_middleware(LocalBoundary,settings=settings,session=app.state.sessions)
@@ -44,6 +45,7 @@ def create_app(settings: Settings | None = None, *, frontend_dist=None):
         return error_response("VALIDATION_ERROR","请检查提交的字段",422,request.state.request_id,details)
 
     app.include_router(router)
+    app.include_router(jobs_router)
     if settings.app_env=="local":
         app.mount("/assets",StaticFiles(directory=dist/"assets",check_dir=False),name="assets")
 

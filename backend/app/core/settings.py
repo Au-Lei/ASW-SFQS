@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     app_timezone: Literal["Asia/Shanghai"] = "Asia/Shanghai"
     database_url: str = "sqlite:///./data/app.sqlite3"
     storage_root: Path = ROOT/"data"
+    storage_max_file_bytes: Annotated[int, Field(ge=1, le=200 * 1024 * 1024)] = 20 * 1024 * 1024
+    worker_lease_seconds: Annotated[int, Field(ge=5, le=3600)] = 30
+    worker_heartbeat_seconds: Annotated[float, Field(ge=0.1)] = 5
+    worker_poll_seconds: Annotated[float, Field(ge=0.1, le=60)] = 2
     model_provider: str = ""
     model_name: str = ""
     model_base_url: str = ""
@@ -29,12 +33,17 @@ class Settings(BaseSettings):
     def local_config(self):
         if self.app_port == self.frontend_port:
             raise ValueError("APP_PORT and FRONTEND_PORT must differ")
+        if self.worker_heartbeat_seconds >= self.worker_lease_seconds / 2:
+            raise ValueError("Worker heartbeat must be less than half its lease")
         if not self.database_url.startswith("sqlite:///"):
             raise ValueError("V1 local mode expects a local SQLite URL")
         from backend.app.repositories.database import database_path
         database_path(self.database_url)
-        if not self.storage_root.is_absolute():
-            self.storage_root = (ROOT/self.storage_root).resolve()
+        from backend.app.storage import LocalStorage
+        configured = self.storage_root if self.storage_root.is_absolute() else ROOT/self.storage_root
+        self.storage_root = LocalStorage(configured, max_bytes=self.storage_max_file_bytes).root
+        if any(self.storage_root.resolve().is_relative_to((ROOT/name).resolve()) for name in ("frontend", "contracts")):
+            raise ValueError("Private storage cannot be inside frontend or served contract directories")
         return self
 
     @property

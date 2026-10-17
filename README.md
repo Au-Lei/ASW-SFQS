@@ -2,7 +2,7 @@
 
 面向国际海运物流业务的报价维护与检索网页系统，第一版维护青岛港六区域报价。
 
-当前完成 **T01—T06：样本基准、数据合同、港口目录与样式、前后端工程、数据库迁移、领域规则与状态校验**。页面可查看六区域预置目录和服务状态；数据库结构已可初始化，候选编辑及审核规则可运行测试，业务接口、正式报价数据、上传识别及导出仍在后续任务实现。下一步是T07。
+当前完成 **T01—T07：样本、合同、目录与样式、前后端、数据库、领域规则、私有存储与独立Worker**。网页可查看预置目录，任务状态/取消/重试接口可用；目前可运行文件完整性核验。正式报价数据、上传识别、审核业务接口及导出仍在后续实现。下一步是T08的受控数据迁移。
 
 ## 开发入口
 
@@ -16,6 +16,8 @@
 - [T05完成报告](docs/T05-数据层与数据库迁移完成报告.md)
 - [领域规则与审核状态](docs/T06-领域规则与状态校验说明.md)
 - [T06完成报告](docs/T06-领域校验与状态机完成报告.md)
+- [文件存储与Worker](docs/T07-文件存储与后台任务说明.md)
+- [T07完成报告](docs/T07-存储与Worker完成报告.md)
 
 ## 目录
 
@@ -23,6 +25,7 @@
 |---|---|
 | `backend/app/domain/` | 共用字段模型、金额日期规则和动态排版 |
 | `backend/app/repositories/`、`backend/migrations/` | 数据实体、精确存储、事务、版本快照及显式迁移 |
+| `backend/app/storage/`、`backend/workers/` | 私有原件、不可覆盖发布、持久任务、租约和恢复 |
 | `backend/app/api/`、`backend/app/core/` | 实际运行的系统接口、本机访问边界和配置 |
 | `frontend/` | React + TypeScript + Vite基础工作台 |
 | `contracts/` | JSON Schema、OpenAPI、共用TypeScript类型及合成示例 |
@@ -65,10 +68,19 @@ uv run --frozen python -m backend.app.repositories.cli check
 
 网页启动不自动升级；已有已知版本升级先备份。操作方式与恢复步骤见[迁移说明](docs/T05-数据库设计与迁移说明.md)。
 
+T07起升级到0003_jobs后，在另一个终端启动独立Worker：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/worker.ps1
+```
+
+Worker不自动建库。文件核验演示、任务接口、取消和恢复方式见[Worker说明](docs/T07-文件存储与后台任务说明.md)；当前未注册OCR或正式报价写入处理器。
+
 ```powershell
 uv run --frozen python -m unittest discover -s tests/system -v
 uv run --frozen python -m unittest discover -s tests/database -v
 uv run --frozen python -m unittest discover -s tests/domain -v
+uv run --frozen python -m unittest discover -s tests/workers -v
 uv run --frozen python -m unittest discover -s tests/contracts -v
 uv run --frozen python -m unittest discover -s tests/template_assets -v
 uv run --frozen python contracts/generate.py --check
